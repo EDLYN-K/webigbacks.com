@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>BIG BACKS | Supreme Food Reviews - Unique Clicker</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,800;14..32,900&family=Kanit:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            cursor: none; /* hide default cursor for custom experience */
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #fef7e8;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            position: relative;
+            background: #0a0a12;
+        }
+
+        /* 🎨 FUN & VIBRANT BLURRED BACKGROUND */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 10% 20%, rgba(255, 94, 77, 0.4), rgba(255, 215, 0, 0.3), rgba(138, 43, 226, 0.4)),
+                        repeating-linear-gradient(45deg, rgba(255,200,100,0.1) 0px, rgba(255,200,100,0.1) 2px, transparent 2px, transparent 8px);
+            background-blend-mode: overlay;
+            z-index: -2;
+            filter: blur(28px);
+            transform: scale(1.1);
+            animation: slowPan 18s infinite alternate ease-in-out;
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at 80% 40%, rgba(255, 105, 180, 0.25), transparent 60%),
+                        radial-gradient(ellipse at 20% 80%, rgba(0, 255, 200, 0.2), transparent 60%);
+            filter: blur(40px);
+            z-index: -1;
+            pointer-events: none;
+            animation: shiftGlow 12s infinite alternate;
+        }
+
+        @keyframes slowPan {
+            0% { transform: scale(1) translate(0%, 0%); filter: blur(26px);}
+            100% { transform: scale(1.08) translate(2%, 3%); filter: blur(32px);}
+        }
+        @keyframes shiftGlow {
+            0% { opacity: 0.6; transform: scale(1);}
+            100% { opacity: 1; transform: scale(1.15);}
+        }
+
+        /* ===== UNIQUE CURSOR CLICKER SYSTEM ===== */
+        .custom-cursor {
+            position: fixed;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #ffcc66, #ff9933);
+            box-shadow: 0 0 20px rgba(255, 200, 100, 0.8);
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.08s linear, width 0.2s, height 0.2s;
+            transform: translate(-50%, -50%);
+            mix-blend-mode: difference;
+            filter: invert(1);
+        }
+        .custom-cursor::after {
+            content: "🍔";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 20px;
+            opacity: 0.9;
+            filter: invert(1);
+            pointer-events: none;
+            transition: all 0.1s;
+        }
+        /* Hover effect for interactive elements */
+        a, button, .resto-card, .poster-highlight, .clickable, .sub, .bigback-btn, footer, .badge-icon, .feature-item, .whataspecial, .flavor-tag, .badge-limited {
+            cursor: none;
+        }
+        /* cursor enlarge on clickable hover */
+        .resto-card:hover ~ .custom-cursor,
+        .resto-card:hover .custom-cursor,
+        .resto-card:hover + .custom-cursor,
+        .clickable:hover ~ .custom-cursor,
+        button:hover ~ .custom-cursor {
+            transform: translate(-50%, -50%) scale(1.4);
+        }
+        
+        /* special click burst animation */
+        .click-burst {
+            position: fixed;
+            pointer-events: none;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #ffdd88, #ff884d);
+            transform: translate(-50%, -50%) scale(0);
+            z-index: 10000;
+            animation: burstAnim 0.5s ease-out forwards;
+            mix-blend-mode: overlay;
+        }
+        @keyframes burstAnim {
+            0% { transform: translate(-50%, -50%) scale(0); opacity: 1; }
+            50% { transform: translate(-50%, -50%) scale(1.5); opacity: 0.7; }
+            100% { transform: translate(-50%, -50%) scale(2.5); opacity: 0; }
+        }
+
+        /* additional typing click effect - burger particles */
+        .burger-crumb {
+            position: fixed;
+            pointer-events: none;
+            font-size: 18px;
+            z-index: 10001;
+            animation: crumbFly 0.6s ease-out forwards;
+            filter: drop-shadow(0 0 4px gold);
+        }
+        @keyframes crumbFly {
+            0% { transform: translate(0, 0) scale(0.5); opacity: 1; }
+            100% { transform: translate(var(--dx, 40px), var(--dy, -40px)) scale(1.2); opacity: 0; }
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1e1a24;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #ffaa33;
+            border-radius: 12px;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 2rem 2rem 5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            backdrop-filter: blur(4px);
+        }
+        .badge-icon {
+            font-size: 3rem;
+            filter: drop-shadow(0 0 15px rgba(255, 180, 60, 0.7));
+            display: inline-block;
+            animation: bounceSoft 2s infinite ease;
+            cursor: pointer;
+            transition: transform 0.2s;
+            color: #FFE484;
+        }
+        .badge-icon:hover {
+            transform: scale(1.1);
+            color: #ffcc44;
+        }
+        @keyframes bounceSoft {
+            0%,100%{ transform: translateY(0);}
+            50%{ transform: translateY(-7px);}
+        }
+        h1 {
+            font-family: 'Kanit', sans-serif;
+            font-size: 5.2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #FFE6B0, #FFB347, #FF6F61);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            letter-spacing: -0.02em;
+            text-shadow: 0 0 20px rgba(255,100,50,0.5);
+            margin: 0.25rem 0 0.5rem;
+        }
+        .sub {
+            font-size: 1.2rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+            word-spacing: 4px;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(12px);
+            display: inline-block;
+            padding: 0.5rem 2rem;
+            border-radius: 60px;
+            border: 1px solid rgba(255, 180, 70, 0.6);
+            cursor: pointer;
+            transition: all 0.2s;
+            color: #fff0d0;
+        }
+        .sub:hover {
+            background: rgba(255, 180, 70, 0.25);
+            border-color: #ffbc6e;
+            transform: scale(1.02);
+        }
+
+        .poster-highlight {
+            background: rgba(0, 0, 0, 0.45);
+            backdrop-filter: blur(16px);
+            border-radius: 48px;
+            margin: 2rem 0 3rem;
+            padding: 1.5rem 2rem;
+            border: 1px solid rgba(255, 180, 100, 0.4);
+            box-shadow: 0 25px 35px -12px rgba(0,0,0,0.4);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .poster-highlight:hover {
+            border-color: #ffbc6e;
+            transform: scale(1.01);
+            background: rgba(0, 0, 0, 0.55);
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        .resto-card {
+            background: rgba(15, 18, 25, 0.75);
+            backdrop-filter: blur(14px);
+            border-radius: 42px;
+            overflow: hidden;
+            transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            box-shadow: 0 20px 30px -10px rgba(0,0,0,0.5);
+            border: 1px solid rgba(255, 180, 70, 0.4);
+            position: relative;
+            cursor: pointer;
+        }
+        .resto-card:hover {
+            transform: translateY(-12px) scale(1.02);
+            border-color: #ffb347;
+            box-shadow: 0 28px 45px -12px rgba(255, 150, 50, 0.35);
+            background: rgba(20, 22, 32, 0.85);
+        }
+        .card-header {
+            padding: 1.6rem 1.8rem 0.8rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            border-bottom: 2px dashed rgba(255, 180, 70, 0.5);
+        }
+        .rank {
+            background: #ffaa33;
+            color: #1e1a10;
+            font-weight: 800;
+            padding: 0.2rem 1rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        .resto-name {
+            font-family: 'Kanit', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            background: linear-gradient(120deg, #ffe6b3, #ffbc6e);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+        .card-content {
+            padding: 1.5rem 1.8rem;
+        }
+        .desc {
+            color: #f0e6d8;
+            line-height: 1.5;
+            margin-bottom: 1.3rem;
+            font-size: 0.95rem;
+        }
+        .feature-item {
+            background: rgba(255, 170, 50, 0.15);
+            border-left: 3px solid #ffaa44;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            margin: 1rem 0;
+            font-weight: 500;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: #fff2e2;
+        }
+        .feature-item:hover {
+            background: rgba(255, 180, 70, 0.3);
+            transform: translateX(5px);
+            border-left-color: #ffcc77;
+        }
+        .feature-item i {
+            color: #ffbc6e;
+            margin-right: 8px;
+        }
+        .badge-limited {
+            display: inline-block;
+            background: rgba(230, 100, 40, 0.85);
+            backdrop-filter: blur(4px);
+            padding: 0.2rem 0.9rem;
+            border-radius: 28px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            margin-top: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: #fff6e8;
+        }
+        .badge-limited:hover {
+            background: #ff7a2f;
+            transform: scale(1.02);
+        }
+
+        .whataspecial {
+            background: rgba(45, 35, 25, 0.75);
+            border-radius: 28px;
+            margin-top: 12px;
+            padding: 0.75rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            border: 1px solid #ffb34790;
+            cursor: pointer;
+            transition: all 0.2s;
+            backdrop-filter: blur(4px);
+        }
+        .whataspecial:hover {
+            background: rgba(70, 55, 40, 0.85);
+            border-color: #ffcc77;
+        }
+        .whataspecial span {
+            font-weight: 800;
+            background: #ffaa44;
+            color: #1f1a0e;
+            padding: 0.2rem 1rem;
+            border-radius: 60px;
+            font-size: 0.7rem;
+        }
+        .whataspecial p {
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            color: #ffe2bc;
+        }
+
+        .flavor-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 15px 0 5px;
+        }
+        .flavor-tag {
+            background: #23222eaa;
+            backdrop-filter: blur(4px);
+            padding: 4px 12px;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: #ffcf9a;
+            border: 0.5px solid #ffae5a;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .flavor-tag:hover {
+            background: #ffb34740;
+            transform: scale(1.05);
+            color: #fff0cc;
+        }
+
+        .sauce-row {
+            display: flex;
+            gap: 8px;
+            margin-top: 15px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            cursor: pointer;
+            color: #ffdebc;
+        }
+        .sauce-row i, .sauce-row span {
+            transition: all 0.2s;
+        }
+        .sauce-row:hover {
+            color: #ffbc70;
+        }
+
+        .glow-button {
+            text-align: center;
+            margin: 3rem 0 2rem;
+        }
+        .bigback-btn {
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(8px);
+            border: 2px solid #ffaa55;
+            padding: 0.9rem 2rem;
+            font-weight: 800;
+            font-size: 1rem;
+            border-radius: 60px;
+            color: #FFF0CC;
+            cursor: pointer;
+            transition: 0.25s;
+            font-family: inherit;
+        }
+        .bigback-btn:hover {
+            background: #ffaa55;
+            color: #1e1a10;
+            box-shadow: 0 0 20px #ffaa55;
+            transform: scale(1.02);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 5rem;
+            font-size: 0.8rem;
+            opacity: 0.8;
+            border-top: 1px dashed rgba(255,170,80,0.4);
+            padding-top: 2rem;
+            cursor: pointer;
+            backdrop-filter: blur(8px);
+        }
+        footer:hover {
+            opacity: 1;
+            color: #ffe0b5;
+        }
+
+        @media (max-width: 780px) {
+            .container { padding: 1rem; }
+            h1 { font-size: 3rem; }
+            .resto-name { font-size: 1.8rem; }
+            .custom-cursor { display: none; } /* fallback on mobile */
+            * { cursor: auto; }
+        }
+
+        .particle {
+            position: fixed;
+            pointer-events: none;
+            background: radial-gradient(circle, rgba(255, 200, 100, 0.6), rgba(255, 120, 80, 0.2));
+            border-radius: 50%;
+            animation: floatPop 4s infinite ease;
+            z-index: -1;
+        }
+        @keyframes floatPop {
+            0% { opacity: 0; transform: scale(0) translateY(0);}
+            30% { opacity: 0.6; transform: scale(1);}
+            100% { opacity: 0; transform: scale(1.8) translateY(-60px);}
+        }
+        .clickable { cursor: pointer; }
+    </style>
+</head>
+<body>
+
+<!-- Custom unique cursor + click burst elements -->
+<div class="custom-cursor" id="customCursor"></div>
+
+<div class="container">
+    <div class="hero">
+        <div class="badge-icon" onclick="window.open('https://www.whataburger.com', '_blank')" title="Visit Whataburger Official">
+            <i class="fas fa-utensils"></i> <i class="fas fa-hamburger"></i>
+        </div>
+        <h1>BIG BACKS</h1>
+        <div class="sub" onclick="window.open('https://www.bigbacks.com', '_blank')" title="Discover BIG BACKS universe">
+            <i class="fas fa-map-marker-alt"></i> THE SUPREME MUNCHIES RANKING <i class="fas fa-crown"></i>
+        </div>
+        <div style="margin-top: 1rem; font-size: 0.9rem; font-weight: 500;" class="clickable" onclick="window.open('https://www.fastfoodmenuprices.com', '_blank')">
+            <i class="fas fa-fire-flame-curved" style="color:#ffbc6e;"></i> For certified Big Backs only — flavor is the religion
+        </div>
+    </div>
+
+    <div class="poster-highlight" onclick="window.open('https://www.fastfoodclub.com/bigbacks-specials', '_blank')">
+        <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap; justify-content: space-between;">
+            <div>
+                <i class="fas fa-bullhorn" style="font-size: 2rem; color:#ffbc6e;"></i>
+                <h3 style="font-weight:800; margin-top: 6px; color:#fff0d0;">🍔 BIG BACK SPECIAL 🍗</h3>
+                <p style="max-width: 450px; color:#ffeacc;">Your ultimate guide to legendary fast food — huge portions, bold flavors. Inspired by the streets & southern heat.</p>
+            </div>
+            <div style="background: rgba(0,0,0,0.5); backdrop-filter: blur(8px); border-radius: 28px; padding: 0.6rem 1.4rem; border:1px solid #ffaa66;">
+                <i class="fas fa-clock"></i> LIMITED CRAVINGS ZONE
+            </div>
+        </div>
+    </div>
+
+    <div class="cards-grid">
+        <!-- WHATABURGER CARD -->
+        <div class="resto-card" onclick="window.open('https://www.whataburger.com/menu', '_blank')">
+            <div class="card-header">
+                <span class="rank">#1 BIG BACK KING</span>
+                <i class="fas fa-star" style="color:#ffcf7a;" onclick="event.stopPropagation(); window.open('https://www.whataburger.com/rewards', '_blank')"></i>
+            </div>
+            <div class="card-content">
+                <div class="resto-name">Whataburger</div>
+                <div class="desc">
+                    <i class="fas fa-location-dot" onclick="event.stopPropagation(); window.open('https://locations.whataburger.com', '_blank')"></i> San Antonio roots, dominating the southern USA. Famous for 5-inch buns.
+                    <strong>If you're a Big Back, FIRST STOP.</strong>
+                </div>
+                <div class="feature-item" onclick="event.stopPropagation(); window.open('https://www.whataburger.com/menu/burgers', '_blank')">
+                    <i class="fas fa-bacon"></i> <strong>All-New:</strong> Southern Bacon Double & Chicken Sandwiches
+                </div>
+                <div class="whataspecial" onclick="event.stopPropagation(); window.open('https://www.whataburger.com/limited-time-offers', '_blank')">
+                    <span><i class="fas fa-stopwatch"></i> LIMITED TIME</span>
+                    <p>🔥 SOUTHERN BACON DOUBLE & CHICKEN SANDWICHES — AVAILABLE NOW</p>
+                </div>
+                <div class="badge-limited" onclick="event.stopPropagation(); window.open('https://www.whataburger.com/menu', '_blank')">
+                    <i class="fas fa-egg"></i> 5-INCH BUN • BIG BACK APPROVED
+                </div>
+            </div>
+        </div>
+
+        <!-- WINGSTOP CARD -->
+        <div class="resto-card" onclick="window.open('https://www.wingstop.com/menu', '_blank')">
+            <div class="card-header">
+                <span class="rank">#2 SAUCE LEGEND</span>
+                <i class="fas fa-drumstick-bite" onclick="event.stopPropagation(); window.open('https://www.wingstop.com/flavors', '_blank')"></i>
+            </div>
+            <div class="card-content">
+                <div class="resto-name">Wingstop</div>
+                <div class="desc">
+                    12 distinct sauced-and-tossed flavors. Most notably <strong class="flavor-tag" style="background:#352d1f;" onclick="event.stopPropagation(); window.open('https://www.wingstop.com/flavors/lemon-pepper', '_blank')">Lemon Pepper</strong> + house-made ranch.
+                </div>
+                <div class="flavor-grid">
+                    <span class="flavor-tag" onclick="event.stopPropagation(); window.open('https://www.wingstop.com/flavors/lemon-pepper', '_blank')"><i class="fas fa-pepper-hot"></i> Lemon Pepper</span>
+                    <span class="flavor-tag" onclick="event.stopPropagation(); window.open('https://www.wingstop.com/flavors/atomic', '_blank')"><i class="fas fa-fire"></i> Atomic</span>
+                    <span class="flavor-tag" onclick="event.stopPropagation(); window.open('https://www.wingstop.com/flavors/mango-habanero', '_blank')"><i class="fas fa-bolt"></i> Mango Habanero</span>
+                    <span class="flavor-tag" onclick="event.stopPropagation(); window.open('https://www.wingstop.com/flavors/garlic-parmesan', '_blank')"><i class="fas fa-garlic"></i> Garlic Parm</span>
+                </div>
+                <div class="feature-item" onclick="event.stopPropagation(); window.open('https://www.wingstop.com/about', '_blank')">
+                    <i class="fas fa-chart-line"></i> Fastest-growing chain
+                </div>
+                <div onclick="event.stopPropagation(); window.open('https://www.wingstop.com/menu/sides', '_blank')"><i class="fas fa-french-fries"></i> Seasoned Fries + ranch</div>
+                <div class="badge-limited" style="background:#865d36;" onclick="event.stopPropagation(); window.open('https://www.wingstop.com/flavors', '_blank')">
+                    <i class="fas fa-thumbs-up"></i> 12 FLAVORS • SAUCE HEAVEN
+                </div>
+            </div>
+        </div>
+
+        <!-- CHICK-FIL-A CARD -->
+        <div class="resto-card" onclick="window.open('https://www.chick-fil-a.com/menu', '_blank')">
+            <div class="card-header">
+                <span class="rank">#3 CHICKEN ROYALTY</span>
+                <i class="fas fa-chicken" onclick="event.stopPropagation(); window.open('https://www.chick-fil-a.com/menu/chicken-sandwiches', '_blank')"></i>
+            </div>
+            <div class="card-content">
+                <div class="resto-name">Chick-fil-A</div>
+                <div class="desc">
+                    Original Chicken Sandwich: hand-breaded, pressure-cooked breast filet, pickles on a toasted butter bun.
+                </div>
+                <div class="feature-item" onclick="event.stopPropagation(); window.open('https://www.chick-fil-a.com/about/who-we-are', '_blank')">
+                    <i class="fas fa-heart"></i> Sunday Closed • Top-rated
+                </div>
+                <div class="sauce-row" onclick="event.stopPropagation(); window.open('https://www.chick-fil-a.com/menu/sides', '_blank')">
+                    <i class="fas fa-waffle"></i> Waffle Fries &nbsp;|&nbsp; 
+                    <i class="fas fa-dip"></i> Chick-fil-A Sauce
+                </div>
+                <div class="whataspecial" style="background: #3a2c1eaa;" onclick="event.stopPropagation(); window.open('https://www.chick-fil-a.com/menu/chicken-sandwiches', '_blank')">
+                    <span><i class="fas fa-clock"></i> FAMOUS DRIVE-THRU</span>
+                    <p>🍗 "My pleasure" service, fresh chicken</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 20px; background: rgba(0,0,0,0.4); backdrop-filter: blur(16px); border-radius: 40px; padding: 1.8rem; margin: 1rem 0 2rem; border: 1px solid rgba(255,180,80,0.5);">
+        <div onclick="window.open('https://www.thebigbackcombo.com', '_blank')" style="cursor: pointer;">
+            <i class="fas fa-crown" style="font-size: 2rem; color:#ffcc77;"></i>
+            <h3 style="font-size: 1.5rem; font-family: 'Kanit'; color:#f5e2c1;">The Big Back Combo</h3>
+            <p>Double cheeseburger + wings + CFA sandwich + fries + shake 🍟</p>
+        </div>
+        <div style="display: flex; align-items: center;">
+            <div class="glow-button" style="margin:0">
+                <button class="bigback-btn" id="bigbackMunchBtn"><i class="fas fa-bolt"></i> ACTIVATE BIG BACK MODE <i class="fas fa-arrow-right"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 2rem; background: rgba(0,0,0,0.45); backdrop-filter: blur(12px); border-radius: 60px; padding: 1rem; font-size: 0.9rem;">
+        <span id="clickMessage" style="font-weight: 500; color:#FFF0CF;"><i class="fas fa-hand-peace"></i> Click any card for a review + unique burger burst!</span>
+    </div>
+
+    <footer onclick="window.open('https://www.bigbacks.com/about', '_blank')">
+        <i class="fas fa-hamburger"></i> BIG BACKS — ultimate authority on over-the-top flavor.
+    </footer>
+</div>
+
+<script>
+    // ---- UNIQUE CURSOR + CLICK BURST SYSTEM ----
+    const cursor = document.getElementById('customCursor');
+    if (window.innerWidth > 780) {
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+        
+        // Hover enlarge effect
+        const interactiveElems = document.querySelectorAll('.resto-card, .poster-highlight, .clickable, .bigback-btn, footer, .badge-icon, .feature-item, .whataspecial, .flavor-tag, .badge-limited, .sub');
+        interactiveElems.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.style.width = '48px';
+                cursor.style.height = '48px';
+                cursor.style.background = 'radial-gradient(circle, #ffdd99, #ffaa44)';
+            });
+            el.addEventListener('mouseleave', () => {
+                cursor.style.width = '32px';
+                cursor.style.height = '32px';
+                cursor.style.background = 'radial-gradient(circle, #ffcc66, #ff9933)';
+            });
+        });
+    } else {
+        if(cursor) cursor.style.display = 'none';
+    }
+
+    // BURST + BURGER CRUMBS on any click
+    function createClickBurst(x, y) {
+        const burst = document.createElement('div');
+        burst.classList.add('click-burst');
+        burst.style.left = x + 'px';
+        burst.style.top = y + 'px';
+        document.body.appendChild(burst);
+        setTimeout(() => burst.remove(), 500);
+        
+        // also create burger crumb particles
+        const crumbIcons = ['🍔', '🍟', '🍗', '🍖', '🌭', '🧀', '🔥'];
+        for (let i = 0; i < 6; i++) {
+            const crumb = document.createElement('div');
+            crumb.classList.add('burger-crumb');
+            crumb.innerText = crumbIcons[Math.floor(Math.random() * crumbIcons.length)];
+            const angle = Math.random() * Math.PI * 2;
+            const distance = 30 + Math.random() * 50;
+            const dx = Math.cos(angle) * distance;
+            const dy = Math.sin(angle) * distance - 20;
+            crumb.style.left = x + 'px';
+            crumb.style.top = y + 'px';
+            crumb.style.setProperty('--dx', dx + 'px');
+            crumb.style.setProperty('--dy', dy + 'px');
+            document.body.appendChild(crumb);
+            setTimeout(() => crumb.remove(), 700);
+        }
+    }
+    
+    document.addEventListener('click', (e) => {
+        createClickBurst(e.clientX, e.clientY);
+    });
+    
+    // preserve existing card review logic + custom message
+    const cards = document.querySelectorAll('.resto-card');
+    const msgSpan = document.getElementById('clickMessage');
+    const reviewMap = {
+        'Whataburger': "🔥 Whataburger: Southern Bacon Double is MASSIVE, 5-inch bun! True big back energy! 🍔✨",
+        'Wingstop': "🍗 LEMON PEPPER + Atomic! Best wings ever, ranch dip is legendary. 🔥🍗",
+        'Chick-fil-A': "🥪 Original Chicken Sandwich: crispy, juicy, pickled perfection with waffle fries 🤍"
+    };
+    
+    cards.forEach(card => {
+        const nameElem = card.querySelector('.resto-name');
+        let restaurantKey = '';
+        if (nameElem) restaurantKey = nameElem.innerText.trim();
+        let targetUrl = '';
+        if (restaurantKey === 'Whataburger') targetUrl = 'https://www.whataburger.com/menu';
+        else if (restaurantKey === 'Wingstop') targetUrl = 'https://www.wingstop.com/menu';
+        else if (restaurantKey === 'Chick-fil-A') targetUrl = 'https://www.chick-fil-a.com/menu';
+        
+        card.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (reviewMap[restaurantKey]) {
+                msgSpan.innerHTML = `<i class="fas fa-comment-dots"></i> ${reviewMap[restaurantKey]} <br><small>✨ opens menu ✨</small>`;
+                setTimeout(() => { if (targetUrl) window.open(targetUrl, '_blank'); }, 100);
+                setTimeout(() => {
+                    msgSpan.innerHTML = `<i class="fas fa-hand-peace"></i> Click any card for a review + unique burger burst!`;
+                }, 4000);
+            } else { if (targetUrl) window.open(targetUrl, '_blank'); }
+            card.style.transition = '0.1s';
+            card.style.boxShadow = '0 0 0 2px #ffbb66, 0 20px 30px -8px black';
+            setTimeout(() => { card.style.boxShadow = ''; }, 200);
+        });
+    });
+    
+    document.querySelectorAll('.resto-card .feature-item, .resto-card .whataspecial, .resto-card .badge-limited, .resto-card .flavor-tag, .resto-card .sauce-row, .resto-card .card-header i, .resto-card .desc i').forEach(el => {
+        if (!el.hasAttribute('data-listener')) {
+            el.setAttribute('data-listener', 'true');
+            el.addEventListener('click', (e) => { e.stopPropagation(); });
+        }
+    });
+    
+    // BIG BACK MODE with extra particles
+    const munchBtn = document.getElementById('bigbackMunchBtn');
+    let bigBackActive = false;
+    munchBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        bigBackActive = !bigBackActive;
+        if (bigBackActive) {
+            document.body.style.background = '#0f0b15';
+            munchBtn.innerHTML = '<i class="fas fa-crown"></i> BIG BACK MODE ACTIVE <i class="fas fa-fire"></i>';
+            munchBtn.style.background = '#ffaa55';
+            munchBtn.style.color = '#1e1508';
+            const toastMsg = document.createElement('div');
+            toastMsg.innerText = '🍔🔥 BIG BACK ENERGY UNLOCKED! 🔥🍗';
+            toastMsg.style.cssText = 'position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:#ffaa55; color:#1f190c; padding:10px 24px; border-radius:60px; font-weight:bold; z-index:999; backdrop-filter:blur(8px);';
+            document.body.appendChild(toastMsg);
+            setTimeout(() => toastMsg.remove(), 2000);
+            const extraInterval = setInterval(() => {
+                if (!bigBackActive) clearInterval(extraInterval);
+                else {
+                    const p = document.createElement('div');
+                    p.classList.add('particle');
+                    p.style.width = Math.random() * 30 + 8 + 'px';
+                    p.style.height = p.style.width;
+                    p.style.left = Math.random() * 100 + '%';
+                    p.style.bottom = '-20px';
+                    p.style.animationDuration = Math.random() * 3 + 2 + 's';
+                    document.body.appendChild(p);
+                    setTimeout(() => p.remove(), 4000);
+                }
+            }, 500);
+            setTimeout(() => { if (bigBackActive) clearInterval(extraInterval); }, 7000);
+        } else {
+            document.body.style.background = '';
+            munchBtn.innerHTML = '<i class="fas fa-bolt"></i> ACTIVATE BIG BACK MODE <i class="fas fa-arrow-right"></i>';
+            munchBtn.style.background = 'rgba(0,0,0,0.5)';
+            munchBtn.style.color = '#FFF0CC';
+            const offMsg = document.createElement('div');
+            offMsg.innerText = '💫 Normal mode — flavor remains 💫';
+            offMsg.style.cssText = 'position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:#221c10; color:#ffcf8a; padding:8px 20px; border-radius:40px; z-index:999;';
+            document.body.appendChild(offMsg);
+            setTimeout(() => offMsg.remove(), 1500);
+        }
+    });
+    
+    // hover gradient cards
+    document.querySelectorAll('.resto-card').forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = ((e.clientX - rect.left) / rect.width) * 100;
+            const y = ((e.clientY - rect.top) / rect.height) * 100;
+            card.style.background = `radial-gradient(circle at ${x}% ${y}%, rgba(30, 35, 55, 0.9), rgba(10, 12, 22, 0.85))`;
+        });
+        card.addEventListener('mouseleave', () => {
+            card.style.background = 'rgba(15, 18, 25, 0.75)';
+        });
+    });
+    
+    const heroDiv = document.querySelector('.hero');
+    if(heroDiv){
+        heroDiv.addEventListener('mousemove', (e) => {
+            const dx = (e.clientX / window.innerWidth) * 10 - 5;
+            const dy = (e.clientY / window.innerHeight) * 10 - 5;
+            heroDiv.style.transform = `perspective(500px) rotateX(${dy*0.2}deg) rotateY(${dx*0.3}deg)`;
+        });
+        heroDiv.addEventListener('mouseleave', () => { heroDiv.style.transform = ''; });
+    }
+    console.log("%c🍔 BIG BACKS — Unique Cursor + Burger Burst Clicker! 🎉", "color: #ffaa55; font-size: 16px; font-weight: bold;");
+</script>
+</body>
+</html>
