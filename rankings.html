@@ -1,1 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>BIG BACKS | The Official Rankings - Ultimate Food Hierarchy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800;14..32,900&family=Kanit:wght@400;500;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f8f6f2;
+            color: #2c2418;
+            overflow-x: hidden;
+        }
+
+        /* Subtle elegant background */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://www.transparenttextures.com/patterns/subtle-dots.png');
+            background-color: #faf7f2;
+            opacity: 0.4;
+            z-index: -2;
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 30%, rgba(220, 200, 170, 0.15), transparent 70%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #e6dfd6; }
+        ::-webkit-scrollbar-thumb { background: #c2a575; border-radius: 10px; }
+
+        /* Header / Navigation */
+        .rankings-header-nav {
+            background: rgba(255, 252, 245, 0.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(170, 145, 110, 0.25);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .nav-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0.8rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .logo-area:hover { transform: scale(1.02); }
+        .logo-icon {
+            font-size: 1.8rem;
+            color: #b28b5e;
+        }
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, #2c241a, #7a5a3a);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+        .nav-link {
+            font-weight: 500;
+            font-size: 0.9rem;
+            cursor: pointer;
+            color: #4a3e2e;
+            transition: 0.2s;
+            border-bottom: 1px solid transparent;
+        }
+        .nav-link:hover { color: #b28b5e; border-bottom-color: #c9ae82; }
+        .home-link {
+            background: #dccaa8;
+            padding: 0.4rem 1.2rem;
+            border-radius: 40px;
+            border: none;
+        }
+        .home-link:hover { background: #c9b286; color: white; border-bottom: none; }
+
+        /* Main container */
+        .rankings-container {
+            max-width: 1250px;
+            margin: 2rem auto;
+            padding: 0 2rem 4rem;
+        }
+
+        /* Hero section */
+        .rankings-hero {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 1rem 0;
+        }
+        .crown-icon {
+            font-size: 2.8rem;
+            color: #d4af6a;
+            filter: drop-shadow(0 2px 6px rgba(0,0,0,0.1));
+            animation: gentleFloat 3s infinite ease;
+        }
+        @keyframes gentleFloat {
+            0%,100%{ transform: translateY(0);}
+            50%{ transform: translateY(-6px);}
+        }
+        .rankings-hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.8rem;
+            font-weight: 700;
+            color: #3d2e1c;
+            letter-spacing: -0.5px;
+            margin: 0.5rem 0;
+        }
+        .rankings-hero p {
+            color: #6f5b41;
+            font-size: 1.05rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .badge-stats {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .stat {
+            background: rgba(235, 225, 210, 0.6);
+            backdrop-filter: blur(4px);
+            padding: 0.3rem 1.2rem;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #5c4a32;
+        }
+
+        /* Filter chips */
+        .filter-section {
+            display: flex;
+            justify-content: center;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+            margin-bottom: 2.5rem;
+        }
+        .filter-chip {
+            background: transparent;
+            border: 1px solid #cfbea0;
+            padding: 0.5rem 1.2rem;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #5a4732;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .filter-chip.active, .filter-chip:hover {
+            background: #c7a86b;
+            border-color: #c7a86b;
+            color: white;
+        }
+
+        /* Rankings LIST - main attraction */
+        .rankings-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+        .rank-card {
+            background: rgba(255, 253, 250, 0.95);
+            backdrop-filter: blur(6px);
+            border-radius: 36px;
+            padding: 1.2rem 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            border: 1px solid rgba(200, 175, 135, 0.45);
+            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            cursor: pointer;
+            box-shadow: 0 5px 12px rgba(0,0,0,0.02);
+        }
+        .rank-card:hover {
+            transform: translateX(10px) scale(1.01);
+            background: #ffffff;
+            border-color: #c2a575;
+            box-shadow: 0 12px 24px -12px rgba(100, 70, 40, 0.2);
+        }
+        .rank-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 800;
+            color: #d4af6a;
+            min-width: 85px;
+            text-align: center;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+        .rank-content {
+            flex: 1;
+        }
+        .rank-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #3b2c1c;
+            letter-spacing: -0.3px;
+        }
+        .rank-desc {
+            color: #6f5b41;
+            font-size: 0.9rem;
+            margin-top: 0.3rem;
+            line-height: 1.4;
+        }
+        .rank-meta {
+            display: flex;
+            gap: 1rem;
+            margin-top: 0.6rem;
+            flex-wrap: wrap;
+        }
+        .score {
+            background: #e9ddce;
+            padding: 0.2rem 1rem;
+            border-radius: 60px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #5c4832;
+        }
+        .category-tag {
+            background: #f3ede5;
+            padding: 0.2rem 1rem;
+            border-radius: 60px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: #8b6e48;
+        }
+        .rank-action {
+            font-size: 1.2rem;
+            color: #c2a06a;
+            transition: 0.2s;
+        }
+        .rank-card:hover .rank-action {
+            transform: translateX(5px);
+            color: #a07d4e;
+        }
+
+        /* Bonus section: Hall of Fame */
+        .hall-of-fame {
+            background: rgba(245, 240, 232, 0.7);
+            border-radius: 48px;
+            padding: 2rem;
+            margin-top: 2rem;
+            border: 1px solid #e2d5c4;
+        }
+        .hall-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: #3d2e1c;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .hall-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.2rem;
+        }
+        .hall-card {
+            background: white;
+            border-radius: 28px;
+            padding: 1rem;
+            text-align: center;
+            transition: 0.2s;
+            border: 1px solid #e9dfd1;
+            cursor: pointer;
+        }
+        .hall-card:hover {
+            transform: translateY(-5px);
+            border-color: #c7a86b;
+        }
+        .hall-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        .hall-name {
+            font-weight: 700;
+            color: #4a3a28;
+        }
+
+        /* footer */
+        .rankings-footer {
+            text-align: center;
+            margin-top: 4rem;
+            font-size: 0.75rem;
+            color: #8d7c64;
+            border-top: 1px solid #e0d3c2;
+            padding-top: 2rem;
+        }
+
+        /* responsive */
+        @media (max-width: 780px) {
+            .rankings-container { padding: 0 1rem 3rem; }
+            .rankings-hero h1 { font-size: 2.4rem; }
+            .rank-number { font-size: 2rem; min-width: 60px; }
+            .rank-title { font-size: 1.3rem; }
+            .rank-card { padding: 1rem; }
+            .nav-container { padding: 0.8rem 1rem; }
+        }
+
+        /* animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .rank-card {
+            animation: fadeInUp 0.5s ease forwards;
+            opacity: 0;
+        }
+        .rank-card:nth-child(1) { animation-delay: 0.05s; }
+        .rank-card:nth-child(2) { animation-delay: 0.1s; }
+        .rank-card:nth-child(3) { animation-delay: 0.15s; }
+        .rank-card:nth-child(4) { animation-delay: 0.2s; }
+        .rank-card:nth-child(5) { animation-delay: 0.25s; }
+        .rank-card:nth-child(6) { animation-delay: 0.3s; }
+        .rank-card:nth-child(7) { animation-delay: 0.35s; }
+        .rank-card:nth-child(8) { animation-delay: 0.4s; }
+    </style>
+</head>
+<body>
+
+<header class="rankings-header-nav">
+    <div class="nav-container">
+        <div class="logo-area" onclick="window.location.href='#';">
+            <i class="fas fa-utensil-spoon logo-icon"></i>
+            <span class="logo-text">BIG BACKS</span>
+        </div>
+        <div class="nav-links">
+            <span class="nav-link" onclick="window.location.href='#';">HOME</span>
+            <span class="nav-link" style="color:#b28b5e; border-bottom-color:#c9ae82;">RANKINGS</span>
+            <span class="nav-link" onclick="window.location.href='#';"><i class="far fa-gem"></i> EPICURE</span>
+            <span class="nav-link home-link" onclick="window.location.href='#';">THE FEAST</span>
+        </div>
+    </div>
+</header>
+
+<main class="rankings-container">
+    <div class="rankings-hero">
+        <div class="crown-icon">
+            <i class="fas fa-crown"></i>
+        </div>
+        <h1>Ultimate Big Back Rankings</h1>
+        <p>Curated by flavor intensity, portion dominance, and pure satisfaction — the definitive fast food hierarchy.</p>
+        <div class="badge-stats">
+            <span class="stat"><i class="fas fa-chart-line"></i> 24+ chains evaluated</span>
+            <span class="stat"><i class="fas fa-utensils"></i> Blind taste panels</span>
+            <span class="stat"><i class="fas fa-fire"></i> Big Back approved</span>
+        </div>
+    </div>
+
+    <!-- Filter chips (interactive category filter) -->
+    <div class="filter-section" id="filterSection">
+        <span class="filter-chip active" data-filter="all">All Rankings</span>
+        <span class="filter-chip" data-filter="burger">🍔 Burger Royalty</span>
+        <span class="filter-chip" data-filter="chicken">🍗 Chicken Legends</span>
+        <span class="filter-chip" data-filter="wings">🔥 Wing Masters</span>
+        <span class="filter-chip" data-filter="value">💎 Value Giants</span>
+    </div>
+
+    <!-- Dynamic rankings list injected via JS but also static fallback -->
+    <div class="rankings-list" id="rankingsList">
+        <!-- items will be populated by JavaScript -->
+    </div>
+
+    <!-- Hall of fame - extra section -->
+    <div class="hall-of-fame">
+        <div class="hall-title">
+            <i class="fas fa-medal" style="color:#d4af6a;"></i> Hall of Fame — Immortal Bites
+        </div>
+        <div class="hall-grid">
+            <div class="hall-card" onclick="window.open('https://www.whataburger.com/menu', '_blank')">
+                <div class="hall-icon">🍔🏆</div>
+                <div class="hall-name">Whataburger Patty Melt</div>
+                <div style="font-size:0.7rem; color:#a08258;">Legacy status</div>
+            </div>
+            <div class="hall-card" onclick="window.open('https://www.chick-fil-a.com/menu', '_blank')">
+                <div class="hall-icon">🥪✨</div>
+                <div class="hall-name">Original Chick-fil-A Sandwich</div>
+                <div style="font-size:0.7rem; color:#a08258;">Timeless classic</div>
+            </div>
+            <div class="hall-card" onclick="window.open('https://www.wingstop.com/flavors/lemon-pepper', '_blank')">
+                <div class="hall-icon">🍗🔥</div>
+                <div class="hall-name">Lemon Pepper Wings (Wingstop)</div>
+                <div style="font-size:0.7rem; color:#a08258;">Cult following</div>
+            </div>
+            <div class="hall-card" onclick="window.open('https://www.in-n-out.com/menu', '_blank')">
+                <div class="hall-icon">🍔🌟</div>
+                <div class="hall-name">Double-Double Animal Style</div>
+                <div style="font-size:0.7rem; color:#a08258;">West coast legend</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="rankings-footer">
+        <i class="fas fa-utensil-spoon"></i> BIG BACKS RANKINGS — definitive power rankings updated quarterly. Every click leads to flavor discovery.
+    </div>
+</main>
+
+<script>
+    // Complete rankings database with categories and links
+    const rankingsData = [
+        { id: 1, rank: 1, name: "Whataburger", description: "The 5-inch burger that started it all. Massive portions, customizable patties, and the legendary Southern Bacon Double. Unmatched for true big backs.", score: "9.8 / 10", category: "burger", link: "https://www.whataburger.com/menu", tags: ["Bacon Double", "5-inch bun"] },
+        { id: 2, rank: 2, name: "Wingstop", description: "12 distinct sauced-and-tossed flavors. Lemon Pepper supremacy, atomic heat, and house-made ranch. The wing experience perfected.", score: "9.6 / 10", category: "wings", link: "https://www.wingstop.com/menu", tags: ["Lemon Pepper", "Seasoned Fries"] },
+        { id: 3, rank: 3, name: "Chick-fil-A", description: "Hand-breaded chicken breast, pressure-cooked to juicy perfection, served on a toasted butter bun with pickles. Waffle fries and signature sauce complete the icon.", score: "9.5 / 10", category: "chicken", link: "https://www.chick-fil-a.com/menu", tags: ["Original Chicken", "Waffle Fries"] },
+        { id: 4, rank: 4, name: "Shake Shack", description: "Premium Angus beef, potato bun, ShackSauce. Modern classic with crinkle-cut fries and rich shakes — elevated fast-casual.", score: "9.3 / 10", category: "burger", link: "https://www.shakeshack.com/menu", tags: ["ShackBurger", "Concrete shakes"] },
+        { id: 5, rank: 5, name: "In-N-Out Burger", description: "Fresh, never frozen ingredients. Double-Double animal style with grilled onions and spread — a cult west coast treasure.", score: "9.2 / 10", category: "burger", link: "https://www.in-n-out.com/menu", tags: ["Animal Style", "Fresh cut fries"] },
+        { id: 6, rank: 6, name: "Popeyes", description: "Spicy chicken sandwich that broke the internet. Buttermilk-battered, crispy, served with Cajun fries and biscuits.", score: "9.0 / 10", category: "chicken", link: "https://www.popeyes.com/menu", tags: ["Spicy Chicken", "Biscuits"] },
+        { id: 7, rank: 7, name: "Raising Cane's", description: "One thing done perfectly: chicken fingers. Cane's sauce, Texas toast, crinkle-cut fries — simple and addictive.", score: "8.8 / 10", category: "chicken", link: "https://www.raisingcanes.com/menu", tags: ["Chicken Fingers", "Cane's Sauce"] },
+        { id: 8, rank: 8, name: "Taco Bell", description: "Crunchwrap Supreme, Cheesy Gordita Crunch, and late-night value. Bold flavors and creative combos for the budget big back.", score: "8.5 / 10", category: "value", link: "https://www.tacobell.com/food", tags: ["Crunchwrap", "Baja Blast"] },
+        { id: 9, rank: 9, name: "Five Guys", description: "Fully customizable burgers with endless toppings. Hand-cut fries cooked in peanut oil — generous portions.", score: "8.7 / 10", category: "burger", link: "https://www.fiveguys.com/menu", tags: ["Custom Burger", "Cajun Fries"] },
+        { id: 10, rank: 10, name: "KFC", description: "Original Recipe chicken with 11 herbs and spices. Mashed potatoes, gravy, and biscuits — comfort food royalty.", score: "8.3 / 10", category: "chicken", link: "https://www.kfc.com/menu", tags: ["Original Recipe", "Famous Bowl"] },
+        { id: 11, rank: 11, name: "McDonald's", description: "World-famous fries, Big Mac sauce, and McFlurries. The universal classic that defines fast food culture.", score: "8.2 / 10", category: "value", link: "https://www.mcdonalds.com/menu", tags: ["Big Mac", "World Famous Fries"] },
+        { id: 12, rank: 12, name: "Buffalo Wild Wings", description: "26 signature sauces and dry rubs. Ultimate sports bar wing experience with traditional and boneless options.", score: "8.4 / 10", category: "wings", link: "https://www.buffalowildwings.com/menu", tags: ["Blazin' Challenge", "Tuesday Deal"] }
+    ];
+
+    // Render function with optional filter
+    function renderRankings(filter = "all") {
+        const container = document.getElementById('rankingsList');
+        if (!container) return;
+        
+        let filteredData = [...rankingsData];
+        if (filter !== "all") {
+            filteredData = rankingsData.filter(item => item.category === filter);
+        }
+        
+        if (filteredData.length === 0) {
+            container.innerHTML = `<div style="text-align:center; padding:2rem; background:#fbf8f2; border-radius:48px;">✨ No rankings match this filter — try another category ✨</div>`;
+            return;
+        }
+        
+        container.innerHTML = filteredData.map(item => `
+            <div class="rank-card" data-category="${item.category}" data-link="${item.link}" data-name="${item.name}">
+                <div class="rank-number">#${item.rank}</div>
+                <div class="rank-content">
+                    <div class="rank-title">${escapeHtml(item.name)}</div>
+                    <div class="rank-desc">${escapeHtml(item.description)}</div>
+                    <div class="rank-meta">
+                        <span class="score"><i class="fas fa-star"></i> ${item.score}</span>
+                        <span class="category-tag"><i class="fas fa-tag"></i> ${item.category === 'burger' ? '🍔 Burger' : item.category === 'chicken' ? '🍗 Chicken' : item.category === 'wings' ? '🔥 Wings' : '💎 Value'}</span>
+                        ${item.tags.map(tag => `<span class="category-tag" style="background:#f1ebdf;">#${tag}</span>`).join('')}
+                    </div>
+                </div>
+                <div class="rank-action">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+            </div>
+        `).join('');
+        
+        // attach click events dynamically
+        document.querySelectorAll('.rank-card').forEach(card => {
+            card.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const link = card.getAttribute('data-link');
+                const name = card.getAttribute('data-name') || "restaurant";
+                if (link) {
+                    // show a small elegant toast before redirect (just for UX)
+                    showToast(`Opening ${name} menu ✨`);
+                    setTimeout(() => {
+                        window.open(link, '_blank');
+                    }, 120);
+                } else {
+                    showToast(`Explore ${name} soon!`);
+                }
+            });
+        });
+    }
+    
+    // Helper to escape HTML
+    function escapeHtml(str) {
+        if (!str) return '';
+        return str.replace(/[&<>]/g, function(m) {
+            if (m === '&') return '&amp;';
+            if (m === '<') return '&lt;';
+            if (m === '>') return '&gt;';
+            return m;
+        }).replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, function(c) {
+            return c;
+        });
+    }
+    
+    // Simple elegant toast
+    function showToast(message) {
+        let existingToast = document.querySelector('.rank-toast');
+        if(existingToast) existingToast.remove();
+        const toast = document.createElement('div');
+        toast.className = 'rank-toast';
+        toast.innerText = message;
+        toast.style.position = 'fixed';
+        toast.style.bottom = '24px';
+        toast.style.left = '50%';
+        toast.style.transform = 'translateX(-50%)';
+        toast.style.backgroundColor = '#2c241a';
+        toast.style.color = '#f2e6d8';
+        toast.style.padding = '10px 22px';
+        toast.style.borderRadius = '50px';
+        toast.style.fontSize = '0.8rem';
+        toast.style.fontWeight = '500';
+        toast.style.zIndex = '9999';
+        toast.style.backdropFilter = 'blur(8px)';
+        toast.style.background = 'rgba(45, 35, 25, 0.92)';
+        toast.style.border = '1px solid #c9ae82';
+        toast.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)';
+        toast.style.fontFamily = "'Inter', sans-serif";
+        document.body.appendChild(toast);
+        setTimeout(() => {
+            toast.style.opacity = '0';
+            setTimeout(() => toast.remove(), 300);
+        }, 1800);
+    }
+    
+    // filter activation and event listeners
+    function initFilters() {
+        const filterChips = document.querySelectorAll('.filter-chip');
+        filterChips.forEach(chip => {
+            chip.addEventListener('click', () => {
+                const filterValue = chip.getAttribute('data-filter');
+                filterChips.forEach(c => c.classList.remove('active'));
+                chip.classList.add('active');
+                renderRankings(filterValue);
+                // smooth scroll to rankings list
+                document.querySelector('.rankings-list').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+    }
+    
+    // attach default render and also hall of fame navigation
+    document.addEventListener('DOMContentLoaded', () => {
+        renderRankings('all');
+        initFilters();
+        
+        // Make navigation links functional (home page placeholder)
+        const homeLinkElem = document.querySelector('.nav-link[onclick*="HOME"]');
+        const epicureLink = document.querySelector('.nav-link[onclick*="EPICURE"]');
+        const feastLink = document.querySelector('.home-link');
+        
+        if (homeLinkElem) {
+            homeLinkElem.addEventListener('click', () => {
+                showToast("🏠 Welcome to BIG BACKS — Explore our rankings first!");
+                // could redirect but we keep as soft toast
+            });
+        }
+        if (epicureLink) {
+            epicureLink.addEventListener('click', () => {
+                showToast("✨ Epicurean selections coming soon — fine dining meets fast food.");
+            });
+        }
+        if (feastLink) {
+            feastLink.addEventListener('click', () => {
+                showToast("🍔 The Grand Feast page — ultimate big back combos loaded.");
+            });
+        }
+        const logoDiv = document.querySelector('.logo-area');
+        if(logoDiv) {
+            logoDiv.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        }
+        
+        // additional: add some small hover effects interactive for hall cards
+        const hallCards = document.querySelectorAll('.hall-card');
+        hallCards.forEach(card => {
+            card.addEventListener('click', (e) => {
+                const name = card.querySelector('.hall-name')?.innerText || "iconic dish";
+                showToast(`✨ Exploring ${name} — legendary bite ✨`);
+            });
+        });
+    });
+</script>
+</body>
+</html>
