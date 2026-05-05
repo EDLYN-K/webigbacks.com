@@ -382,10 +382,10 @@
             <span class="logo-text">BIG BACKS</span>
         </div>
         <div class="nav-links">
-            <span class="nav-item" onclick="showPage('home')">Home</span>
-            <span class="nav-item" onclick="showPage('rankings')">Rankings</span>
-            <span class="nav-item" onclick="showPage('epicure')">Epicure</span>
-            <span class="nav-item header-cta" onclick="showPage('feast')">The Feast</span>
+            <span class="nav-item" onclick="showPage('index.html')">Home</span>
+            <span class="nav-item" onclick="showPage('rankings.html')">Rankings</span>
+            <span class="nav-item" onclick="showPage('epicure.html')">Epicure</span>
+            <span class="nav-item header-cta" onclick="showPage('feast.html')">The Feast</span>
         </div>
     </div>
 </header>
@@ -414,7 +414,7 @@
 
         <div class="cards-grid">
             <!-- Whataburger Card with realistic photo -->
-            <div class="resto-card" onclick="window.open('https://www.whataburger.com/menu', '_blank')">
+            <div class="resto-card" onclick="window.open('https://whataburgers.us/', '_blank')">
                 <div class="card-img-placeholder whataburger-img"></div>
                 <div class="card-header">
                     <span class="rank">#1 Southern Classic</span>
@@ -486,7 +486,7 @@
             <p>Evaluated on flavor depth, ingredient quality, and overall satisfaction</p>
         </div>
         <div class="rankings-list">
-            <div class="ranking-item" onclick="window.open('https://www.whataburger.com/menu', '_blank')"><div class="ranking-number">01</div><div class="ranking-info"><h3>Whataburger</h3><p>Generous portions, bold Southern flavors</p></div><div class="ranking-score">9.8 / 10</div></div>
+            <div class="ranking-item" onclick="window.open('https://whataburgers.us/', '_blank')"><div class="ranking-number">01</div><div class="ranking-info"><h3>Whataburger</h3><p>Generous portions, bold Southern flavors</p></div><div class="ranking-score">9.8 / 10</div></div>
             <div class="ranking-item" onclick="window.open('https://www.wingstop.com/menu', '_blank')"><div class="ranking-number">02</div><div class="ranking-info"><h3>Wingstop</h3><p>Complex sauce profiles, exceptional crispness</p></div><div class="ranking-score">9.5 / 10</div></div>
             <div class="ranking-item" onclick="window.open('https://www.chick-fil-a.com/menu', '_blank')"><div class="ranking-number">03</div><div class="ranking-info"><h3>Chick-fil-A</h3><p>Perfectly brined chicken, consistent excellence</p></div><div class="ranking-score">9.3 / 10</div></div>
             <div class="ranking-item" onclick="window.open('https://www.shakeshack.com/menu', '_blank')"><div class="ranking-number">04</div><div class="ranking-info"><h3>Shake Shack</h3><p>Premium Angus beef, artisanal approach</p></div><div class="ranking-score">9.1 / 10</div></div>
@@ -581,7 +581,7 @@
         const nameEl = card.querySelector('.resto-name');
         let key = nameEl ? nameEl.innerText.trim() : '';
         let url = '';
-        if (key === 'Whataburger') url = 'https://www.whataburger.com/menu';
+        if (key === 'Whataburger') url = 'https://whataburgers.us/';
         else if (key === 'Wingstop') url = 'https://www.wingstop.com/menu';
         else if (key === 'Chick-fil-A') url = 'https://www.chick-fil-a.com/menu';
         card.addEventListener('click', (e) => {
