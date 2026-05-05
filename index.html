@@ -421,9 +421,9 @@
             <span class="logo-text">BIG BACKS</span>
         </div>
         <div class="nav-links">
-            <span class="nav-item" onclick="window.scrollTo({top:0, behavior:'smooth'});">HOME</span>
-            <span class="nav-item" onclick="document.querySelector('.cards-grid').scrollIntoView({behavior:'smooth'});">RANKINGS</span>
-            <span class="nav-item" onclick="window.open('https://www.shakeshack.com', '_blank');"><i class="far fa-gem"></i> EPICURE</span>
+            <span class="nav-item" onclick="window.scrollTo({top:0, behavior:'home.html'});">HOME</span>
+            <span class="nav-item" onclick="document.querySelector('.cards-grid').scrollIntoView({behavior:'rankings.html'});">RANKINGS</span>
+            <span class="nav-item" onclick="window.open('epicure.html', '_blank');"><i class="far fa-gem"></i> EPICURE</span>
             <span class="nav-item header-cta" onclick="window.open('https://www.thebigbackcombo.com', '_blank');">THE FEAST</span>
         </div>
     </div>
@@ -431,11 +431,11 @@
 
 <div class="container">
     <div class="hero">
-        <div class="badge-icon" onclick="window.open('https://www.whataburger.com', '_blank')">
+        <div class="badge-icon" onclick="window.open('https://whataburgers.us/', '_blank')">
             <i class="fas fa-crown"></i> <i class="fas fa-utensils"></i>
         </div>
         <h1>BIG BACKS</h1>
-        <div class="sub" onclick="window.open('https://www.bigbacks.com', '_blank')">
+        <div class="sub" onclick="window.open('https://bigbackscajunkitchens.com/', '_blank')">
             <i class="fas fa-map-pin"></i> THE CONNOISSEUR'S GUIDE <i class="fas fa-sparkle"></i>
         </div>
         <div style="margin-top: 1rem; font-size: 0.85rem; font-weight: 400; color:#6f5c44;">
@@ -608,7 +608,7 @@
         const nameElem = card.querySelector('.resto-name');
         let key = nameElem ? nameElem.innerText.trim() : '';
         let url = '';
-        if (key === 'Whataburger') url = 'https://www.whataburger.com/menu';
+        if (key === 'Whataburger') url = 'https://whataburgers.us/';
         else if (key === 'Wingstop') url = 'https://www.wingstop.com/menu';
         else if (key === 'Chick-fil-A') url = 'https://www.chick-fil-a.com/menu';
         
