@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>BIG BACKS | Home — The Connoisseur's Guide to Refined Fast Food</title>
+    <meta name="description" content="BIG BACKS offers curated, sophisticated fast food reviews for the discerning palate. Discover top-rated burgers, wings, and more with elegant imagery and expert insights.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #F4EFE9;
+            color: #2B2825;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Sophisticated Texture Background */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://www.transparenttextures.com/patterns/clean-gray-paper.png');
+            background-color: #F9F6F0;
+            opacity: 0.4;
+            z-index: -2;
+        }
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 70% 30%, rgba(200, 180, 150, 0.1), transparent 70%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Elegant Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #E2D9CF; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb { background: #A68A62; border-radius: 10px; }
+
+        /* Header */
+        .main-header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(245, 240, 234, 0.92);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid rgba(140, 120, 90, 0.2);
+        }
+        .header-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0.8rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+        .logo-area:hover { opacity: 0.8; }
+        .logo-icon {
+            font-size: 1.6rem;
+            color: #8B6F47;
+        }
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: -0.2px;
+            background: linear-gradient(135deg, #3A3026, #6A5338);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+        .nav-item {
+            font-weight: 500;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: color 0.2s;
+            color: #4F4237;
+            letter-spacing: 0.3px;
+            border-bottom: 1px solid transparent;
+            padding-bottom: 2px;
+        }
+        .nav-item:hover { color: #8B6F47; border-bottom-color: #C5AD8A; }
+        .nav-item.active {
+            color: #8B6F47;
+            border-bottom-color: #C5AD8A;
+        }
+        .header-cta {
+            background: #DBC9AE;
+            padding: 0.3rem 1.2rem;
+            border-radius: 30px;
+            color: #2E261E;
+            font-weight: 600;
+            border: none;
+        }
+        .header-cta:hover { background: #CBB692; color: #1F1A13; border-bottom: none; }
+
+        /* Main Container */
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 2rem 2rem 4rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            margin: 1rem 0 3rem;
+        }
+        .badge-icon {
+            font-size: 2.2rem;
+            color: #A68A62;
+            margin-bottom: 0.5rem;
+            letter-spacing: 4px;
+        }
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 600;
+            color: #2F2A24;
+            letter-spacing: -0.3px;
+            margin: 0.25rem 0;
+        }
+        .sub {
+            font-size: 0.85rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            background: rgba(235, 226, 214, 0.6);
+            display: inline-block;
+            padding: 0.35rem 1.8rem;
+            border-radius: 40px;
+            border: 0.5px solid #D1C0A8;
+            color: #6E5B48;
+        }
+        .hero p {
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            color: #7F6B55;
+        }
+
+        /* Poster Highlight */
+        .poster-highlight {
+            background: rgba(255, 251, 245, 0.8);
+            border-radius: 32px;
+            margin: 2rem 0 3rem;
+            padding: 1.4rem 2rem;
+            border: 1px solid #E2D4C4;
+            transition: all 0.25s;
+            cursor: pointer;
+        }
+        .poster-highlight:hover {
+            background: #FFFFFF;
+            border-color: #C5AD8A;
+            transform: scale(1.01);
+        }
+
+        /* Featured Section Title */
+        .featured-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #3D3124;
+            margin: 2rem 0 1rem;
+            border-left: 4px solid #BD9F78;
+            padding-left: 1rem;
+        }
+
+        /* Cards Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0 3rem;
+        }
+        .resto-card {
+            background: #FFFFFF;
+            border-radius: 28px;
+            overflow: hidden;
+            transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
+            border: 1px solid #E6DBCF;
+            cursor: pointer;
+        }
+        .resto-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 22px 32px -14px rgba(60, 45, 30, 0.15);
+            border-color: #BD9F78;
+        }
+        .card-img {
+            height: 210px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            transition: transform 0.5s ease;
+        }
+        .resto-card:hover .card-img {
+            transform: scale(1.02);
+        }
+        .whataburger-img { background-image: url('https://images.unsplash.com/photo-1572802419224-296b0aeee0d9?w=800&auto=format'); background-position: 50% 35%; }
+        .wingstop-img { background-image: url('https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?w=800&auto=format'); background-position: 50% 50%; }
+        .chickfila-img { background-image: url('https://images.unsplash.com/photo-1550547660-d9450f859349?w=800&auto=format'); background-position: 50% 45%; }
+        .img-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.5), transparent);
+            padding: 1rem 1rem 0.5rem;
+            color: #F5EADB;
+            font-size: 0.7rem;
+            font-weight: 500;
+            text-align: right;
+            letter-spacing: 0.5px;
+        }
+        .card-header {
+            padding: 1.2rem 1.5rem 0.2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+        }
+        .rank {
+            background: #EBE1D4;
+            color: #5F4A33;
+            font-weight: 600;
+            padding: 0.2rem 1rem;
+            border-radius: 30px;
+            font-size: 0.7rem;
+        }
+        .resto-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.7rem;
+            font-weight: 600;
+            color: #3D3124;
+        }
+        .card-content { padding: 1rem 1.5rem 1.5rem; }
+        .desc {
+            color: #5E5548;
+            line-height: 1.45;
+            font-size: 0.85rem;
+            margin-bottom: 0.8rem;
+        }
+        .details-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin: 0.8rem 0;
+        }
+        .detail-badge {
+            background: #F4EFE7;
+            padding: 0.2rem 0.7rem;
+            border-radius: 20px;
+            font-size: 0.65rem;
+            font-weight: 500;
+            color: #6A5843;
+        }
+        .feature-item {
+            background: #F8F4ED;
+            border-left: 3px solid #BD9F78;
+            padding: 0.5rem 0.8rem;
+            border-radius: 14px;
+            margin: 0.8rem 0;
+            font-size: 0.8rem;
+            color: #4F4237;
+            transition: 0.2s;
+        }
+        .feature-item:hover { background: #EFE5DA; transform: translateX(4px); }
+        .badge-limited {
+            background: #EADFCB;
+            color: #5C4936;
+            padding: 0.2rem 0.8rem;
+            border-radius: 26px;
+            font-size: 0.65rem;
+            font-weight: 500;
+            display: inline-block;
+            margin-top: 8px;
+        }
+        .flavor-tag {
+            background: #EEE6DC;
+            padding: 3px 10px;
+            border-radius: 30px;
+            font-size: 0.65rem;
+            color: #735F48;
+            display: inline-block;
+        }
+        .whataspecial {
+            background: #F6F0E8;
+            border-radius: 20px;
+            padding: 0.6rem 0.9rem;
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+        .whataspecial span {
+            background: #BD9F78;
+            color: white;
+            padding: 0.2rem 0.8rem;
+            border-radius: 40px;
+            font-size: 0.65rem;
+            font-weight: 500;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: #F5EFE7;
+            border-radius: 36px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 1.5rem;
+            border: 0.5px solid #D6C5AE;
+        }
+        .cta-section h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: #3D3124;
+        }
+        .cta-section p {
+            font-size: 0.8rem;
+            color: #6A5A48;
+        }
+        .btn {
+            background: transparent;
+            border: 1.5px solid #BD9F78;
+            padding: 0.6rem 1.6rem;
+            font-weight: 600;
+            font-size: 0.8rem;
+            border-radius: 40px;
+            color: #5C4A38;
+            transition: 0.2s;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background: #BD9F78;
+            color: white;
+        }
+
+        /* Newsletter & Footer */
+        .newsletter {
+            background: #EBE3D8;
+            border-radius: 28px;
+            padding: 1.8rem;
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .newsletter h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            color: #4A3C2C;
+        }
+        .newsletter p {
+            font-size: 0.75rem;
+            color: #6F5B44;
+            margin-top: 0.3rem;
+        }
+        .newsletter-input {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+        .newsletter-input input {
+            padding: 0.6rem 1rem;
+            border-radius: 40px;
+            border: 1px solid #D1C0A8;
+            background: white;
+            width: 260px;
+            font-size: 0.8rem;
+            font-family: inherit;
+            outline: none;
+        }
+        .newsletter-input button {
+            background: #BD9F78;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 40px;
+            color: white;
+            font-weight: 600;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .newsletter-input button:hover { background: #A07D55; }
+
+        footer {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 0.7rem;
+            color: #8F7C66;
+            border-top: 1px solid #E0D3C4;
+            padding-top: 2rem;
+        }
+
+        @media (max-width: 780px) {
+            .container { padding: 1rem; }
+            h1 { font-size: 2.8rem; }
+            .cards-grid { grid-template-columns: 1fr; }
+            .header-container { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="main-header">
+    <div class="header-container">
+        <div class="logo-area" onclick="window.scrollTo({top:0, behavior:'smooth'});">
+            <i class="fas fa-utensil-spoon logo-icon"></i>
+            <span class="logo-text">BIG BACKS</span>
+        </div>
+        <div class="nav-links">
+            <span class="nav-item active" onclick="window.scrollTo({top:0, behavior:'smooth'});">HOME</span>
+            <span class="nav-item" onclick="window.location.href='#';">RANKINGS</span>
+            <span class="nav-item" onclick="window.location.href='#';">EPICURE</span>
+            <span class="nav-item header-cta" onclick="window.location.href='#';">THE FEAST</span>
+        </div>
+    </div>
+</header>
+
+<main class="container">
+    <div class="hero">
+        <div class="badge-icon">
+            <i class="fas fa-crown"></i> <i class="fas fa-utensils"></i>
+        </div>
+        <h1>BIG BACKS</h1>
+        <div class="sub">THE CONNOISSEUR'S FAST FOOD GUIDE</div>
+        <p>Curated reviews for the discerning palate — where quality meets indulgence.</p>
+    </div>
+
+    <div class="poster-highlight" onclick="window.open('https://www.fastfoodclub.com', '_blank')">
+        <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap; justify-content: space-between;">
+            <div>
+                <i class="fas fa-champagne-glasses" style="font-size: 1.8rem; color:#b88c48;"></i>
+                <h3 style="font-weight:600; margin-top: 6px; font-family: 'Playfair Display';">The Epicurean Selection</h3>
+                <p style="max-width: 450px; color:#6f5b41;">Discover the most refined fast-food experiences, rated by our panel of gastronomes.</p>
+            </div>
+            <div style="background: #ede3d7; border-radius: 40px; padding: 0.4rem 1.2rem; font-size: 0.75rem;">
+                <i class="far fa-clock"></i> CRAVINGS COLLECTION
+            </div>
+        </div>
+    </div>
+
+    <div class="featured-title">
+        <i class="fas fa-star" style="color:#c7a86b; font-size: 1.2rem;"></i> Featured Reviews
+    </div>
+
+    <div class="cards-grid">
+        <!-- Whataburger Card -->
+        <div class="resto-card" onclick="window.open('https://www.whataburger.com/menu', '_blank')">
+            <div class="card-img whataburger-img">
+                <div class="img-overlay">Texas Heritage • Est. 1950</div>
+            </div>
+            <div class="card-header">
+                <span class="rank">#1 Southern Classic</span>
+                <i class="fas fa-star" style="color:#c1a062; font-size:0.8rem;"></i>
+            </div>
+            <div class="card-content">
+                <div class="resto-name">Whataburger</div>
+                <div class="desc">Legendary Texas-born chain known for generously portioned 5-inch buns and made-to-order patties.</div>
+                <div class="details-grid">
+                    <span class="detail-badge">🍔 5-inch Bun</span>
+                    <span class="detail-badge">🔥 2/3 lb Patties</span>
+                    <span class="detail-badge">🌶 Spicy Ketchup</span>
+                </div>
+                <div class="feature-item"><i class="fas fa-bacon"></i> <strong>Signature:</strong> Southern Bacon Double with creamy pepper sauce</div>
+                <div class="whataspecial"><span>Limited Time</span> <p>Southern Bacon Double & Honey Butter Chicken Biscuit</p></div>
+                <div class="badge-limited">5-INCH BUN • OPEN 24/7</div>
+            </div>
+        </div>
+
+        <!-- Wingstop Card -->
+        <div class="resto-card" onclick="window.open('https://www.wingstop.com/menu', '_blank')">
+            <div class="card-img wingstop-img">
+                <div class="img-overlay">Flavor Innovation Lab</div>
+            </div>
+            <div class="card-header">
+                <span class="rank">#2 Flavor Authority</span>
+                <i class="fas fa-drumstick-bite" style="color:#c1a062;"></i>
+            </div>
+            <div class="card-content">
+                <div class="resto-name">Wingstop</div>
+                <div class="desc">Cooked-to-order wings with 12 distinct sauces. Lemon Pepper legendary status with house-made ranch.</div>
+                <div class="details-grid">
+                    <span class="flavor-tag">🍋 Lemon Pepper</span>
+                    <span class="flavor-tag">🔥 Atomic</span>
+                    <span class="flavor-tag">🌶 Mango Habanero</span>
+                </div>
+                <div class="feature-item"><i class="fas fa-chart-line"></i> Fastest-growing flavor experience • 1,800+ locations</div>
+                <div class="badge-limited">12 FLAVORS • SEASONED FRIES</div>
+            </div>
+        </div>
+
+        <!-- Chick-fil-A Card -->
+        <div class="resto-card" onclick="window.open('https://www.chick-fil-a.com/menu', '_blank')">
+            <div class="card-img chickfila-img">
+                <div class="img-overlay">Pressure-cooked perfection</div>
+            </div>
+            <div class="card-header">
+                <span class="rank">#3 Timeless Icon</span>
+                <i class="fas fa-chicken" style="color:#c1a062;"></i>
+            </div>
+            <div class="card-content">
+                <div class="resto-name">Chick-fil-A</div>
+                <div class="desc">Hand-breaded chicken breast, pressure-cooked in peanut oil, served on toasted butter bun with pickles.</div>
+                <div class="details-grid">
+                    <span class="detail-badge">🥪 Original Sandwich</span>
+                    <span class="detail-badge">🍟 Waffle Fries</span>
+                </div>
+                <div class="feature-item"><i class="fas fa-heart"></i> Sunday Closed • #1 Customer Satisfaction (ACSI)</div>
+                <div class="badge-limited">FRESH • NEVER FROZEN</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="cta-section">
+        <div>
+            <h3>The Grand Feast Experience</h3>
+            <p>Curated indulgences for the ultimate gastronomic journey.</p>
+        </div>
+        <button class="btn" id="exploreFeastBtn">Explore The Feast <i class="fas fa-arrow-right"></i></button>
+    </div>
+
+    <div class="newsletter">
+        <h4>Join the Epicurean Circle</h4>
+        <p>Receive curated reviews, exclusive tasting notes, and seasonal selections.</p>
+        <div class="newsletter-input">
+            <input type="email" placeholder="Your email address" id="newsletterEmail">
+            <button id="newsletterBtn">Subscribe</button>
+        </div>
+    </div>
+
+    <footer>
+        <i class="fas fa-utensil-spoon"></i> BIG BACKS — where cravings meet refinement. All restaurant cards link to official menus.
+    </footer>
+</main>
+
+<script>
+    // Interactive card messages
+    const cards = document.querySelectorAll('.resto-card');
+    const reviewMessages = {
+        'Whataburger': "🍔 Whataburger: The Southern Bacon Double delivers robust smoky flavor and remarkable portion size — a true Texas legend.",
+        'Wingstop': "🍗 Wingstop: Lemon Pepper wings are impeccably balanced, with a signature ranch dip that elevates every bite.",
+        'Chick-fil-A': "🥪 Chick-fil-A: The original chicken sandwich remains a benchmark of consistency — juicy, perfectly brined, and pressure-cooked."
+    };
+    
+    cards.forEach(card => {
+        const nameElem = card.querySelector('.resto-name');
+        let key = nameElem ? nameElem.innerText.trim() : '';
+        let url = '';
+        if (key === 'Whataburger') url = 'https://www.whataburger.com/menu';
+        else if (key === 'Wingstop') url = 'https://www.wingstop.com/menu';
+        else if (key === 'Chick-fil-A') url = 'https://www.chick-fil-a.com/menu';
+        
+        card.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (reviewMessages[key]) {
+                // Show subtle alert/toast
+                const toast = document.createElement('div');
+                toast.innerText = reviewMessages[key] + ' ✨ Opening menu...';
+                toast.style.cssText = 'position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:#DBC9AE; color:#352D22; padding:8px 20px; border-radius:40px; font-size:0.75rem; z-index:1000; backdrop-filter:blur(8px);';
+                document.body.appendChild(toast);
+                setTimeout(() => toast.remove(), 2500);
+                setTimeout(() => { if (url) window.open(url, '_blank'); }, 200);
+            } else if (url) window.open(url, '_blank');
+        });
+    });
+    
+    // Prevent propagation on inner interactive elements
+    document.querySelectorAll('.resto-card .feature-item, .resto-card .whataspecial, .resto-card .badge-limited, .resto-card .flavor-tag, .resto-card .card-header i, .resto-card .detail-badge').forEach(el => {
+        el.addEventListener('click', (e) => e.stopPropagation());
+    });
+    
+    // Feast button interaction
+    const feastBtn = document.getElementById('exploreFeastBtn');
+    if (feastBtn) {
+        feastBtn.addEventListener('click', () => {
+            const toast = document.createElement('div');
+            toast.innerText = '🍽️ The Grand Feast — maximum indulgence awaits.';
+            toast.style.cssText = 'position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:#BD9F78; color:white; padding:8px 20px; border-radius:40px; font-size:0.75rem; z-index:1000;';
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 2000);
+            // Simulate navigation (in full site would go to feast page)
+            setTimeout(() => { window.open('https://www.thebigbackcombo.com', '_blank'); }, 300);
+        });
+    }
+    
+    // Newsletter subscription
+    const newsletterBtn = document.getElementById('newsletterBtn');
+    const emailInput = document.getElementById('newsletterEmail');
+    if (newsletterBtn) {
+        newsletterBtn.addEventListener('click', () => {
+            const email = emailInput.value.trim();
+            if (email && email.includes('@')) {
+                const toast = document.createElement('div');
+                toast.innerText = '✨ Thank you for subscribing. Welcome to the Epicurean Circle. ✨';
+                toast.style.cssText = 'position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:#2C241E; color:#EADFCB; padding:10px 24px; border-radius:40px; font-size:0.75rem; z-index:1000;';
+                document.body.appendChild(toast);
+                setTimeout(() => toast.remove(), 3000);
+                emailInput.value = '';
+            } else {
+                const toast = document.createElement('div');
+                toast.innerText = 'Please enter a valid email address.';
+                toast.style.cssText = 'position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:#B28B5E; color:white; padding:8px 20px; border-radius:40px; font-size:0.7rem; z-index:1000;';
+                document.body.appendChild(toast);
+                setTimeout(() => toast.remove(), 2000);
+            }
+        });
+    }
+
+    // Smooth scroll for navigation
+    document.querySelectorAll('.nav-item').forEach(item => {
+        if (item.innerText === 'HOME') {
+            item.addEventListener('click', () => window.scrollTo({top: 0, behavior: 'smooth'}));
+        }
+    });
+</script>
+</body>
+</html>
