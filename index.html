@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>BIG BACKS | Connoisseur's Review — Refined Palate</title>
-    <!-- Google Fonts: Elegant & Professional -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
@@ -12,6 +11,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            cursor: none;
         }
 
         body {
@@ -22,7 +22,7 @@
             scroll-behavior: smooth;
         }
 
-        /* Sophisticated Subtle Texture */
+        /* Premium Texture Overlay */
         body::before {
             content: "";
             position: fixed;
@@ -48,12 +48,70 @@
             pointer-events: none;
         }
 
-        /* Classy Scrollbar */
+        /* Elegant Custom Cursor */
+        .custom-cursor {
+            position: fixed;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: rgba(210, 180, 140, 0.4);
+            backdrop-filter: blur(2px);
+            border: 1.5px solid #c2a575;
+            box-shadow: 0 0 12px rgba(170, 140, 90, 0.4);
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.1s linear, width 0.2s, height 0.2s;
+            transform: translate(-50%, -50%);
+        }
+        .custom-cursor::after {
+            content: "✦";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 16px;
+            color: #b48c48;
+            text-shadow: 0 0 2px white;
+            opacity: 0.9;
+            pointer-events: none;
+        }
+
+        /* Click Burst Effect */
+        .click-burst {
+            position: fixed;
+            pointer-events: none;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(200, 175, 120, 0.5), rgba(245, 225, 170, 0.2));
+            transform: translate(-50%, -50%) scale(0);
+            z-index: 10000;
+            animation: glamBurst 0.5s ease-out forwards;
+        }
+        @keyframes glamBurst {
+            0% { transform: translate(-50%, -50%) scale(0); opacity: 0.7; }
+            100% { transform: translate(-50%, -50%) scale(2.2); opacity: 0; }
+        }
+        
+        .burger-crumb {
+            position: fixed;
+            pointer-events: none;
+            font-size: 16px;
+            z-index: 10001;
+            animation: crumbGlide 0.6s ease-out forwards;
+            filter: drop-shadow(0 0 3px rgba(0,0,0,0.1));
+        }
+        @keyframes crumbGlide {
+            0% { transform: translate(0, 0) scale(0.6); opacity: 0.8; }
+            100% { transform: translate(var(--dx, 30px), var(--dy, -30px)) scale(1); opacity: 0; }
+        }
+
+        /* Elegant Scrollbar */
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: #E2D9CF; border-radius: 10px; }
         ::-webkit-scrollbar-thumb { background: #A68A62; border-radius: 10px; }
 
-        /* Header - Elegant Glassmorphism */
+        /* Header - Sophisticated Glassmorphism */
         .main-header {
             position: sticky;
             top: 0;
@@ -89,7 +147,10 @@
             font-size: 1.5rem;
             font-weight: 600;
             letter-spacing: -0.2px;
-            color: #3A3026;
+            background: linear-gradient(135deg, #3A3026, #6A5338);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
         }
         .nav-links {
             display: flex;
@@ -117,25 +178,14 @@
         }
         .header-cta:hover { background: #CBB692; color: #1F1A13; border-bottom: none; }
 
-        /* Main Wrapper */
+        /* Main Container */
         .container {
             max-width: 1300px;
             margin: 0 auto;
             padding: 2rem 2rem 4rem;
         }
 
-        /* Page Switching */
-        .page {
-            display: none;
-            animation: fadeIn 0.45s ease;
-        }
-        .page.active-page { display: block; }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(12px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Home Page Typography - No Emojis, Refined */
+        /* Hero Section */
         .hero {
             text-align: center;
             margin: 1rem 0 3rem;
@@ -145,7 +195,10 @@
             color: #A68A62;
             margin-bottom: 0.5rem;
             letter-spacing: 4px;
+            cursor: pointer;
+            transition: transform 0.2s;
         }
+        .badge-icon:hover { transform: scale(1.05); }
         h1 {
             font-family: 'Playfair Display', serif;
             font-size: 4rem;
@@ -164,6 +217,7 @@
             border-radius: 40px;
             border: 0.5px solid #D1C0A8;
             color: #6E5B48;
+            cursor: pointer;
         }
 
         /* Poster Highlight */
@@ -182,10 +236,10 @@
             transform: scale(1.01);
         }
 
-        /* Cards Grid - Realistic, Photo-Ready */
+        /* Cards Grid - Rich Visuals */
         .cards-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
             gap: 2rem;
             margin: 2.5rem 0;
         }
@@ -193,26 +247,43 @@
             background: #FFFFFF;
             border-radius: 28px;
             overflow: hidden;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.04);
+            transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
             border: 1px solid #E6DBCF;
             cursor: pointer;
         }
         .resto-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 18px 28px -12px rgba(60, 45, 30, 0.12);
+            transform: translateY(-8px);
+            box-shadow: 0 22px 32px -14px rgba(60, 45, 30, 0.18);
             border-color: #BD9F78;
         }
-        /* Realistic image placeholders using Unsplash (sophisticated food photography) */
-        .card-img-placeholder {
-            height: 180px;
+        /* Professional Food Photography */
+        .card-img {
+            height: 220px;
             background-size: cover;
             background-position: center;
-            background-repeat: no-repeat;
+            position: relative;
+            transition: transform 0.5s ease;
         }
-        .whataburger-img { background-image: url('https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600&auto=format'); }
-        .wingstop-img { background-image: url('https://images.unsplash.com/photo-1608039755401-742074f0548d?w=600&auto=format'); }
-        .chickfila-img { background-image: url('https://images.unsplash.com/photo-1562967916-eb82221dfb92?w=600&auto=format'); }
+        .resto-card:hover .card-img {
+            transform: scale(1.02);
+        }
+        .whataburger-img { background-image: url('https://images.unsplash.com/photo-1572802419224-296b0aeee0d9?w=800&auto=format'); background-position: 50% 40%; }
+        .wingstop-img { background-image: url('https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?w=800&auto=format'); background-position: 50% 50%; }
+        .chickfila-img { background-image: url('https://images.unsplash.com/photo-1550547660-d9450f859349?w=800&auto=format'); background-position: 50% 45%; }
+        .img-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.55), transparent);
+            padding: 1.2rem 1rem 0.6rem;
+            color: #F5EADB;
+            font-size: 0.7rem;
+            font-weight: 500;
+            text-align: right;
+            letter-spacing: 0.5px;
+        }
         .card-header {
             padding: 1.2rem 1.5rem 0.2rem;
             display: flex;
@@ -229,16 +300,30 @@
         }
         .resto-name {
             font-family: 'Playfair Display', serif;
-            font-size: 1.6rem;
+            font-size: 1.7rem;
             font-weight: 600;
             color: #3D3124;
         }
         .card-content { padding: 1rem 1.5rem 1.5rem; }
         .desc {
             color: #5E5548;
-            line-height: 1.45;
+            line-height: 1.5;
             font-size: 0.85rem;
-            margin-bottom: 1rem;
+            margin-bottom: 0.8rem;
+        }
+        .details-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin: 0.8rem 0;
+        }
+        .detail-badge {
+            background: #F4EFE7;
+            padding: 0.2rem 0.7rem;
+            border-radius: 20px;
+            font-size: 0.65rem;
+            font-weight: 500;
+            color: #6A5843;
         }
         .feature-item {
             background: #F8F4ED;
@@ -248,7 +333,9 @@
             margin: 0.8rem 0;
             font-size: 0.8rem;
             color: #4F4237;
+            transition: 0.2s;
         }
+        .feature-item:hover { background: #EFE5DA; transform: translateX(4px); }
         .badge-limited {
             background: #EADFCB;
             color: #5C4936;
@@ -257,7 +344,7 @@
             font-size: 0.65rem;
             font-weight: 500;
             display: inline-block;
-            margin-top: 10px;
+            margin-top: 8px;
         }
         .whataspecial {
             background: #F6F0E8;
@@ -282,7 +369,10 @@
             border-radius: 30px;
             font-size: 0.65rem;
             color: #735F48;
+            display: inline-block;
+            transition: 0.2s;
         }
+        .flavor-tag:hover { background: #E1D4C4; transform: scale(1.02); }
         .bigback-btn {
             background: transparent;
             border: 1.5px solid #BD9F78;
@@ -292,313 +382,288 @@
             border-radius: 40px;
             color: #5C4A38;
             transition: 0.2s;
+            cursor: pointer;
         }
         .bigback-btn:hover {
             background: #BD9F78;
             color: white;
-        }
-
-        /* Rankings / Epicure / Feast Pages – Minimalist, Textured */
-        .rankings-header, .epicure-header, .feast-header {
-            text-align: center;
-            margin-bottom: 2.5rem;
-        }
-        .rankings-header h2, .epicure-header h2, .feast-header h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.6rem;
-            font-weight: 600;
-            color: #3F3326;
-        }
-        .ranking-item, .epicure-item, .feast-item {
-            background: #FFFFFF;
-            border-radius: 24px;
-            padding: 1.2rem 1.8rem;
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-            flex-wrap: wrap;
-            border: 1px solid #E6DBCD;
-            transition: all 0.2s;
-            cursor: pointer;
-            margin-bottom: 1rem;
-        }
-        .ranking-item:hover, .epicure-item:hover, .feast-item:hover {
-            background: #FEFCF8;
-            border-color: #CBB58E;
-            transform: translateX(5px);
-        }
-        .ranking-number {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.2rem;
-            font-weight: 700;
-            color: #9F8462;
-            min-width: 70px;
-        }
-        .ranking-info h3, .epicure-info h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.4rem;
-            color: #4A3C2C;
-        }
-        .ranking-score, .epicure-tag {
-            background: #F1E9DF;
-            padding: 0.3rem 1rem;
-            border-radius: 40px;
-            font-size: 0.75rem;
-            font-weight: 500;
-        }
-        .feast-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 1.5rem;
-        }
-        .feast-item {
-            flex-direction: column;
-            text-align: center;
+            box-shadow: 0 4px 12px rgba(160, 120, 70, 0.2);
         }
         footer {
             text-align: center;
             margin-top: 4rem;
             font-size: 0.7rem;
-            color: #8F7C66;
+            opacity: 0.7;
             border-top: 1px solid #E0D3C4;
             padding-top: 2rem;
+            color: #8F7C66;
+            cursor: pointer;
+            transition: opacity 0.2s;
         }
+        footer:hover { opacity: 1; }
+        
         @media (max-width: 780px) {
             .container { padding: 1rem; }
             h1 { font-size: 2.8rem; }
-        }
-        /* realistic rich text */
-        p, .desc, .ranking-info p {
-            font-weight: 400;
+            .custom-cursor { display: none; }
+            * { cursor: auto; }
         }
     </style>
 </head>
 <body>
 
+<div class="custom-cursor" id="customCursor"></div>
+
 <header class="main-header">
     <div class="header-container">
-        <div class="logo-area" onclick="showPage('home')">
+        <div class="logo-area" onclick="window.scrollTo({top:0, behavior:'smooth'});">
             <i class="fas fa-utensil-spoon logo-icon"></i>
             <span class="logo-text">BIG BACKS</span>
         </div>
         <div class="nav-links">
-            <span class="nav-item" onclick="showPage('index.html')">Home</span>
-            <span class="nav-item" onclick="showPage('rankings.html')">Rankings</span>
-            <span class="nav-item" onclick="showPage('epicure.html')">Epicure</span>
-            <span class="nav-item header-cta" onclick="showPage('feast.html')">The Feast</span>
+            <span class="nav-item" onclick="window.scrollTo({top:0, behavior:'smooth'});">HOME</span>
+            <span class="nav-item" onclick="document.querySelector('.cards-grid').scrollIntoView({behavior:'smooth'});">RANKINGS</span>
+            <span class="nav-item" onclick="window.open('https://www.shakeshack.com', '_blank');"><i class="far fa-gem"></i> EPICURE</span>
+            <span class="nav-item header-cta" onclick="window.open('https://www.thebigbackcombo.com', '_blank');">THE FEAST</span>
         </div>
     </div>
 </header>
 
 <div class="container">
-    <!-- HOME PAGE with realistic images & no emojis -->
-    <div id="homePage" class="page active-page">
-        <div class="hero">
-            <div class="badge-icon">
-                <i class="fas fa-utensils"></i> <i class="fas fa-wine-glass-alt"></i>
-            </div>
-            <h1>BIG BACKS</h1>
-            <div class="sub">THE CONNOISSEUR'S FAST FOOD GUIDE</div>
-            <div style="margin-top: 1rem; font-size: 0.8rem; color:#7F6B55;">Curated reviews for the discerning palate</div>
+    <div class="hero">
+        <div class="badge-icon" onclick="window.open('https://www.whataburger.com', '_blank')">
+            <i class="fas fa-crown"></i> <i class="fas fa-utensils"></i>
         </div>
-
-        <div class="poster-highlight" onclick="window.open('https://www.fastfoodclub.com/bigbacks-specials', '_blank')">
-            <div style="display: flex; justify-content: space-between; flex-wrap: wrap; align-items: center;">
-                <div>
-                    <h3 style="font-family: 'Playfair Display';">The Epicurean Selection</h3>
-                    <p style="color:#66553F;">Discover the most refined fast-food experiences, rated by our panel of gastronomes.</p>
-                </div>
-                <div style="background:#EADFCB; padding:0.3rem 1rem; border-radius: 30px; font-size:0.7rem;">Curated Collection</div>
-            </div>
+        <h1>BIG BACKS</h1>
+        <div class="sub" onclick="window.open('https://www.bigbacks.com', '_blank')">
+            <i class="fas fa-map-pin"></i> THE CONNOISSEUR'S GUIDE <i class="fas fa-sparkle"></i>
         </div>
-
-        <div class="cards-grid">
-            <!-- Whataburger Card with realistic photo -->
-            <div class="resto-card" onclick="window.open('https://whataburgers.us/', '_blank')">
-                <div class="card-img-placeholder whataburger-img"></div>
-                <div class="card-header">
-                    <span class="rank">#1 Southern Classic</span>
-                    <i class="fas fa-star" style="color:#C9AD7A; font-size:0.8rem;"></i>
-                </div>
-                <div class="card-content">
-                    <div class="resto-name">Whataburger</div>
-                    <div class="desc">Iconic Texas-born chain known for its generously portioned 5-inch buns and customizable patties.</div>
-                    <div class="feature-item"><i class="fas fa-bacon"></i> <strong>Signature:</strong> Southern Bacon Double & Chicken Sandwich</div>
-                    <div class="whataspecial"><span>Limited Time</span> <p>Southern Bacon Double — A true indulgence</p></div>
-                    <div class="badge-limited">5-inch Bun • Regional Favorite</div>
-                </div>
-            </div>
-
-            <!-- Wingstop Card -->
-            <div class="resto-card" onclick="window.open('https://www.wingstop.com/menu', '_blank')">
-                <div class="card-img-placeholder wingstop-img"></div>
-                <div class="card-header">
-                    <span class="rank">#2 Flavor Authority</span>
-                    <i class="fas fa-drumstick-bite" style="color:#C9AD7A;"></i>
-                </div>
-                <div class="card-content">
-                    <div class="resto-name">Wingstop</div>
-                    <div class="desc">Twelve signature sauces, cooked to order. Renowned for Lemon Pepper and house-made ranch.</div>
-                    <div class="flavor-grid" style="display:flex; gap:6px; flex-wrap:wrap;">
-                        <span class="flavor-tag">Lemon Pepper</span>
-                        <span class="flavor-tag">Atomic</span>
-                        <span class="flavor-tag">Mango Habanero</span>
-                    </div>
-                    <div class="feature-item"><i class="fas fa-chart-line"></i> Fastest-growing flavor brand</div>
-                    <div class="badge-limited">12 distinct flavors • Seasoned fries</div>
-                </div>
-            </div>
-
-            <!-- Chick-fil-A Card -->
-            <div class="resto-card" onclick="window.open('https://www.chick-fil-a.com/menu', '_blank')">
-                <div class="card-img-placeholder chickfila-img"></div>
-                <div class="card-header">
-                    <span class="rank">#3 Timeless Standard</span>
-                    <i class="fas fa-chicken" style="color:#C9AD7A;"></i>
-                </div>
-                <div class="card-content">
-                    <div class="resto-name">Chick-fil-A</div>
-                    <div class="desc">Hand-breaded chicken breast, pressure-cooked, served on a toasted butter bun with pickles.</div>
-                    <div class="feature-item"><i class="fas fa-heart"></i> Sunday Closed • Top-rated service</div>
-                    <div class="badge-limited">Waffle Fries • Signature Sauce</div>
-                </div>
-            </div>
+        <div style="margin-top: 1rem; font-size: 0.85rem; font-weight: 400; color:#6f5c44;">
+            <i class="fas fa-fire" style="color:#ca9e5a;"></i> For the sophisticated palate — flavor is an art form
         </div>
+    </div>
 
-        <div style="background: #F5EFE7; border-radius: 36px; padding: 1.2rem 1.8rem; margin: 1rem 0; display: flex; justify-content: space-between; flex-wrap: wrap; align-items: center;">
+    <div class="poster-highlight" onclick="window.open('https://www.fastfoodclub.com/bigbacks-specials', '_blank')">
+        <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap; justify-content: space-between;">
             <div>
-                <h3 style="font-family: 'Playfair Display';">The Grand Feast Experience</h3>
-                <p style="font-size:0.8rem; color:#6A5A48">Curated indulgences for the ultimate gastronomic journey.</p>
+                <i class="fas fa-champagne-glasses" style="font-size: 1.8rem; color:#b88c48;"></i>
+                <h3 style="font-weight:600; margin-top: 6px; font-family: 'Playfair Display';">Epicurean Selection</h3>
+                <p style="max-width: 450px; color:#6f5b41;">Where fast food meets elevated taste — curated for real connoisseurs.</p>
             </div>
-            <button class="bigback-btn" id="bigbackMunchBtn">Refined Atmosphere <i class="fas fa-arrow-right"></i></button>
-        </div>
-        
-        <div style="text-align: center; margin-top: 2rem; background: #EDE4DA; border-radius: 60px; padding: 0.6rem;">
-            <span style="font-size:0.75rem; letter-spacing:0.5px;"><i class="fas fa-info-circle"></i> Select any restaurant card to explore curated menus</span>
+            <div style="background: #ede3d7; border-radius: 40px; padding: 0.4rem 1.2rem; font-size: 0.75rem;">
+                <i class="far fa-clock"></i> CRAVINGS COLLECTION
+            </div>
         </div>
     </div>
 
-    <!-- RANKINGS PAGE - Sophisticated -->
-    <div id="rankingsPage" class="page">
-        <div class="rankings-header">
-            <i class="fas fa-trophy" style="font-size: 2rem; color:#A68A62;"></i>
-            <h2>Definitive Rankings</h2>
-            <p>Evaluated on flavor depth, ingredient quality, and overall satisfaction</p>
+    <div class="cards-grid">
+        <!-- WHATABURGER CARD -->
+        <div class="resto-card" onclick="window.open('https://www.whataburger.com/menu', '_blank')">
+            <div class="card-img whataburger-img">
+                <div class="img-overlay">Texas Heritage • Est. 1950</div>
+            </div>
+            <div class="card-header">
+                <span class="rank">#1 Southern Classic</span>
+                <i class="fas fa-star" style="color:#c1a062; font-size:0.8rem;"></i>
+            </div>
+            <div class="card-content">
+                <div class="resto-name">Whataburger</div>
+                <div class="desc">Legendary Texas-born chain known for generously portioned 5-inch buns and made-to-order patties.</div>
+                <div class="details-grid">
+                    <span class="detail-badge">🍔 5-inch Bun</span>
+                    <span class="detail-badge">🔥 2/3 lb Patties</span>
+                    <span class="detail-badge">🌶 Spicy Ketchup</span>
+                </div>
+                <div class="feature-item"><i class="fas fa-bacon"></i> <strong>Signature:</strong> Southern Bacon Double — applewood smoked bacon, creamy pepper sauce</div>
+                <div class="whataspecial"><span>Limited Time</span> <p>Southern Bacon Double & Honey Butter Chicken Biscuit</p></div>
+                <div class="badge-limited">5-INCH BUN • OPEN 24 HOURS</div>
+            </div>
         </div>
-        <div class="rankings-list">
-            <div class="ranking-item" onclick="window.open('https://whataburgers.us/', '_blank')"><div class="ranking-number">01</div><div class="ranking-info"><h3>Whataburger</h3><p>Generous portions, bold Southern flavors</p></div><div class="ranking-score">9.8 / 10</div></div>
-            <div class="ranking-item" onclick="window.open('https://www.wingstop.com/menu', '_blank')"><div class="ranking-number">02</div><div class="ranking-info"><h3>Wingstop</h3><p>Complex sauce profiles, exceptional crispness</p></div><div class="ranking-score">9.5 / 10</div></div>
-            <div class="ranking-item" onclick="window.open('https://www.chick-fil-a.com/menu', '_blank')"><div class="ranking-number">03</div><div class="ranking-info"><h3>Chick-fil-A</h3><p>Perfectly brined chicken, consistent excellence</p></div><div class="ranking-score">9.3 / 10</div></div>
-            <div class="ranking-item" onclick="window.open('https://www.shakeshack.com/menu', '_blank')"><div class="ranking-number">04</div><div class="ranking-info"><h3>Shake Shack</h3><p>Premium Angus beef, artisanal approach</p></div><div class="ranking-score">9.1 / 10</div></div>
-            <div class="ranking-item" onclick="window.open('https://www.in-n-out.com/menu', '_blank')"><div class="ranking-number">05</div><div class="ranking-info"><h3>In-N-Out Burger</h3><p>Fresh, never frozen, cult classic</p></div><div class="ranking-score">8.9 / 10</div></div>
+
+        <!-- WINGSTOP CARD -->
+        <div class="resto-card" onclick="window.open('https://www.wingstop.com/menu', '_blank')">
+            <div class="card-img wingstop-img">
+                <div class="img-overlay">Flavor Innovation Lab</div>
+            </div>
+            <div class="card-header">
+                <span class="rank">#2 Flavor Authority</span>
+                <i class="fas fa-drumstick-bite" style="color:#c1a062;"></i>
+            </div>
+            <div class="card-content">
+                <div class="resto-name">Wingstop</div>
+                <div class="desc">Cooked-to-order wings with 12 distinct sauces. Lemon Pepper legendary status with house-made ranch.</div>
+                <div class="flavor-grid" style="display:flex; gap:6px; flex-wrap:wrap; margin:0.5rem 0;">
+                    <span class="flavor-tag">🍋 Lemon Pepper</span>
+                    <span class="flavor-tag">🔥 Atomic</span>
+                    <span class="flavor-tag">🌶 Mango Habanero</span>
+                </div>
+                <div class="feature-item"><i class="fas fa-chart-line"></i> Fastest-growing flavor experience • 1,800+ locations</div>
+                <div class="badge-limited">12 FLAVORS • SEASONED FRIES</div>
+            </div>
         </div>
-        <div style="text-align:center; margin-top:1.5rem;"><button class="bigback-btn" onclick="showPage('home')">Return to Main</button></div>
+
+        <!-- CHICK-FIL-A CARD -->
+        <div class="resto-card" onclick="window.open('https://www.chick-fil-a.com/menu', '_blank')">
+            <div class="card-img chickfila-img">
+                <div class="img-overlay">Pressure-cooked perfection</div>
+            </div>
+            <div class="card-header">
+                <span class="rank">#3 Timeless Icon</span>
+                <i class="fas fa-chicken" style="color:#c1a062;"></i>
+            </div>
+            <div class="card-content">
+                <div class="resto-name">Chick-fil-A</div>
+                <div class="desc">Hand-breaded chicken breast, pressure-cooked in peanut oil, served on toasted butter bun with pickles.</div>
+                <div class="details-grid">
+                    <span class="detail-badge">🥪 Original Sandwich</span>
+                    <span class="detail-badge">🍟 Waffle Fries</span>
+                </div>
+                <div class="feature-item"><i class="fas fa-heart"></i> Sunday Closed • #1 Customer Satisfaction (ACSI)</div>
+                <div class="badge-limited">FRESH • NEVER FROZEN</div>
+            </div>
+        </div>
     </div>
 
-    <!-- EPICURE PAGE - Refined Selections -->
-    <div id="epicurePage" class="page">
-        <div class="epicure-header">
-            <i class="far fa-gem" style="font-size: 2rem; color:#A68A62;"></i>
-            <h2>Epicurean Selections</h2>
-            <p>Where fast food meets refined ingredient sourcing</p>
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 20px; background: #faf6ef; border-radius: 40px; padding: 1.5rem; margin: 1rem 0 2rem; border: 0.5px solid #d6c5ae;">
+        <div onclick="window.open('https://www.thebigbackcombo.com', '_blank')" style="cursor: pointer;">
+            <i class="fas fa-gem" style="font-size: 1.8rem; color:#bc9468;"></i>
+            <h3 style="font-size: 1.4rem; font-family: 'Playfair Display';">The Grand Feast Combo</h3>
+            <p style="color:#6a553b;">Double burger + wings + sandwich + fries + shake</p>
         </div>
-        <div class="epicure-list">
-            <div class="epicure-item" onclick="window.open('https://www.shakeshack.com/menu', '_blank')"><div class="epicure-icon">🍔</div><div class="epicure-info"><h3>Shake Shack</h3><p>100% all-natural Angus beef, non-GMO potato bun</p></div><div class="epicure-tag">Artisanal</div></div>
-            <div class="epicure-item" onclick="window.open('https://www.fiveguys.com/menu', '_blank')"><div class="epicure-icon">🥩</div><div class="epicure-info"><h3>Five Guys</h3><p>Fresh patties, hand-cut fries cooked in peanut oil</p></div><div class="epicure-tag">Craft Burger</div></div>
-            <div class="epicure-item" onclick="window.open('https://www.thehabit.com/menu', '_blank')"><div class="epicure-icon">🔥</div><div class="epicure-info"><h3>The Habit</h3><p>Charbroiled over an open flame, Santa Barbara style</p></div><div class="epicure-tag">Charbroiled</div></div>
+        <div style="display: flex; align-items: center;">
+            <div class="glow-button" style="margin:0">
+                <button class="bigback-btn" id="bigbackMunchBtn"><i class="fas fa-sparkle"></i> REFINED ATMOSPHERE <i class="fas fa-arrow-right"></i></button>
+            </div>
         </div>
-        <div style="text-align:center; margin-top:1.5rem;"><button class="bigback-btn" onclick="showPage('home')">Back to Home</button></div>
     </div>
 
-    <!-- FEAST PAGE - Ultimate Indulgence (refined) -->
-    <div id="feastPage" class="page">
-        <div class="feast-header">
-            <i class="fas fa-utensils" style="font-size: 2rem; color:#A68A62;"></i>
-            <h2>The Grand Feast</h2>
-            <p>Maximum indulgence for the cultivated appetite</p>
-        </div>
-        <div class="feast-grid">
-            <div class="feast-item" onclick="window.open('https://www.pizzahut.com/menu', '_blank')"><div class="feast-icon">🍕</div><div class="feast-info"><h3>Ultimate Stuffed Crust</h3><p>Pepperoni, sausage, mushrooms, extra cheese</p></div><div class="feast-price">Feast Size</div></div>
-            <div class="feast-item" onclick="window.open('https://www.bk.com/menu', '_blank')"><div class="feast-icon">🍔</div><div class="feast-info"><h3>Triple Whopper Stack</h3><p>Three flame-grilled patties, bacon, onion rings</p></div><div class="feast-price">King's Meal</div></div>
-            <div class="feast-item" onclick="window.open('https://www.tacobell.com/food', '_blank')"><div class="feast-icon">🌮</div><div class="feast-info"><h3>Crunchwrap Supreme Box</h3><p>Loaded Crunchwrap, Cheesy Gordita Crunch</p></div><div class="feast-price">Value Feast</div></div>
-            <div class="feast-item" onclick="window.open('https://www.kfc.com/menu', '_blank')"><div class="feast-icon">🍗</div><div class="feast-info"><h3>Bucket of Chicken</h3><p>Original recipe, mashed potatoes, coleslaw</p></div><div class="feast-price">Family Feast</div></div>
-        </div>
-        <div style="text-align:center; margin-top:1.5rem;"><button class="bigback-btn" onclick="showPage('home')">Back to Home</button></div>
+    <div style="text-align: center; margin-top: 2rem; background: rgba(245, 240, 232, 0.7); border-radius: 60px; padding: 0.8rem;">
+        <span id="clickMessage" style="font-weight: 500; color:#6a563d;"><i class="fas fa-hand-peace"></i> Select any card — discover refined flavors + elegant sparkle</span>
     </div>
 
     <footer onclick="window.open('https://www.bigbacks.com/about', '_blank')">
-        <i class="fas fa-utensil-spoon"></i> BIG BACKS — refined reviews since 2024. All selections lead to official menus.
+        <i class="fas fa-utensil-spoon"></i> BIG BACKS — where cravings meet refinement. All selections lead to official menus.
     </footer>
 </div>
 
 <script>
-    function showPage(pageId) {
-        document.querySelectorAll('.page').forEach(page => page.classList.remove('active-page'));
-        const activePage = document.getElementById(pageId + 'Page');
-        if (activePage) activePage.classList.add('active-page');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
+    // Elegant Cursor Effects
+    const cursor = document.getElementById('customCursor');
+    if (window.innerWidth > 780) {
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+        const interactive = document.querySelectorAll('.resto-card, .poster-highlight, .bigback-btn, footer, .badge-icon, .feature-item, .whataspecial, .flavor-tag, .badge-limited, .sub, .nav-item, .logo-area, .header-cta');
+        interactive.forEach(el => {
+            el.addEventListener('mouseenter', () => { 
+                cursor.style.width = '42px'; 
+                cursor.style.height = '42px'; 
+                cursor.style.background = 'rgba(200, 175, 135, 0.5)'; 
+            });
+            el.addEventListener('mouseleave', () => { 
+                cursor.style.width = '28px'; 
+                cursor.style.height = '28px'; 
+                cursor.style.background = 'rgba(210, 180, 140, 0.4)'; 
+            });
+        });
+    } else if(cursor) cursor.style.display = 'none';
 
-    // Glamour mode / refined atmosphere toggle
-    const glamBtn = document.getElementById('bigbackMunchBtn');
+    // Glamorous Click Burst Effect
+    function createGlamBurst(x, y) {
+        const burst = document.createElement('div');
+        burst.classList.add('click-burst');
+        burst.style.left = x + 'px';
+        burst.style.top = y + 'px';
+        document.body.appendChild(burst);
+        setTimeout(() => burst.remove(), 500);
+        const icons = ['🍔', '✨', '🍟', '🍗', '🥂'];
+        for (let i=0; i<5; i++) {
+            const crumb = document.createElement('div');
+            crumb.classList.add('burger-crumb');
+            crumb.innerText = icons[Math.floor(Math.random()*icons.length)];
+            const angle = Math.random() * Math.PI * 2;
+            const dist = 30 + Math.random() * 45;
+            const dx = Math.cos(angle)*dist;
+            const dy = Math.sin(angle)*dist - 20;
+            crumb.style.left = x + 'px';
+            crumb.style.top = y + 'px';
+            crumb.style.setProperty('--dx', dx + 'px');
+            crumb.style.setProperty('--dy', dy + 'px');
+            document.body.appendChild(crumb);
+            setTimeout(() => crumb.remove(), 700);
+        }
+    }
+    document.addEventListener('click', (e) => { createGlamBurst(e.clientX, e.clientY); });
+
+    // Card Click Interactions with Refined Messages
+    const cards = document.querySelectorAll('.resto-card');
+    const msgSpan = document.getElementById('clickMessage');
+    const reviewMap = {
+        'Whataburger': "🍔 Whataburger: The Southern Bacon Double delivers robust smoky flavor and remarkable portion size — a true Texas legend.",
+        'Wingstop': "🍗 Wingstop: Lemon Pepper wings are impeccably balanced, with a signature ranch dip that elevates every bite.",
+        'Chick-fil-A': "🥪 Chick-fil-A: The original chicken sandwich remains a benchmark of consistency — juicy, perfectly brined, and pressure-cooked."
+    };
+    cards.forEach(card => {
+        const nameElem = card.querySelector('.resto-name');
+        let key = nameElem ? nameElem.innerText.trim() : '';
+        let url = '';
+        if (key === 'Whataburger') url = 'https://www.whataburger.com/menu';
+        else if (key === 'Wingstop') url = 'https://www.wingstop.com/menu';
+        else if (key === 'Chick-fil-A') url = 'https://www.chick-fil-a.com/menu';
+        
+        card.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (reviewMap[key]) {
+                msgSpan.innerHTML = `<i class="fas fa-comment-dots"></i> ${reviewMap[key]} <br><small>✨ access full menu ✨</small>`;
+                setTimeout(() => { if (url) window.open(url, '_blank'); }, 100);
+                setTimeout(() => {
+                    msgSpan.innerHTML = `<i class="fas fa-hand-peace"></i> Select any card — discover refined flavors + elegant sparkle`;
+                }, 4500);
+            } else if (url) window.open(url, '_blank');
+            card.style.transform = 'scale(0.98)';
+            setTimeout(() => { card.style.transform = ''; }, 150);
+        });
+    });
+    
+    // Prevent propagation for inner interactive elements
+    document.querySelectorAll('.resto-card .feature-item, .resto-card .whataspecial, .resto-card .badge-limited, .resto-card .flavor-tag, .resto-card .card-header i, .resto-card .detail-badge').forEach(el => {
+        if (!el.hasAttribute('data-listener')) {
+            el.setAttribute('data-listener', 'true');
+            el.addEventListener('click', (e) => e.stopPropagation());
+        }
+    });
+
+    // Refined Atmosphere Toggle Mode
+    const munchBtn = document.getElementById('bigbackMunchBtn');
     let refinedActive = false;
-    if (glamBtn) {
-        glamBtn.addEventListener('click', () => {
+    if (munchBtn) {
+        munchBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
             refinedActive = !refinedActive;
             if (refinedActive) {
-                document.body.style.background = "#FEFCF8";
-                glamBtn.innerHTML = 'Sophisticated Mode Active <i class="fas fa-check"></i>';
-                glamBtn.style.background = '#BD9F78';
-                glamBtn.style.color = 'white';
+                document.body.style.background = '#FEFCF8';
+                munchBtn.innerHTML = '<i class="fas fa-crown"></i> SOPHISTICATED MODE ACTIVE <i class="fas fa-check"></i>';
+                munchBtn.style.background = '#BD9F78';
+                munchBtn.style.color = 'white';
                 const toast = document.createElement('div');
-                toast.innerText = 'Refined ambiance engaged — timeless elegance.';
-                toast.style.cssText = 'position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:#DBC9AE; color:#352D22; padding:6px 20px; border-radius:40px; font-size:0.7rem; z-index:999; backdrop-filter:blur(4px);';
+                toast.innerText = '✨ Refined ambiance engaged — timeless elegance. ✨';
+                toast.style.cssText = 'position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:#DBC9AE; color:#352D22; padding:8px 24px; border-radius:40px; font-size:0.75rem; font-weight:500; z-index:999; backdrop-filter:blur(8px);';
                 document.body.appendChild(toast);
-                setTimeout(() => toast.remove(), 1800);
+                setTimeout(() => toast.remove(), 2000);
             } else {
-                document.body.style.background = "";
-                glamBtn.innerHTML = 'Refined Atmosphere <i class="fas fa-arrow-right"></i>';
-                glamBtn.style.background = 'transparent';
-                glamBtn.style.color = '#5C4A38';
-                const toast = document.createElement('div');
-                toast.innerText = 'Classic view restored.';
-                toast.style.cssText = 'position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:#ECE1D4; color:#4F3F2E; padding:6px 20px; border-radius:40px; font-size:0.7rem; z-index:999;';
-                document.body.appendChild(toast);
-                setTimeout(() => toast.remove(), 1500);
+                document.body.style.background = '';
+                munchBtn.innerHTML = '<i class="fas fa-sparkle"></i> REFINED ATMOSPHERE <i class="fas fa-arrow-right"></i>';
+                munchBtn.style.background = 'transparent';
+                munchBtn.style.color = '#5C4A38';
+                const off = document.createElement('div');
+                off.innerText = '💫 Classic view restored — timeless flavors remain. 💫';
+                off.style.cssText = 'position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:#ECE1D4; color:#4F3F2E; padding:6px 20px; border-radius:40px; z-index:999; font-size:0.7rem;';
+                document.body.appendChild(off);
+                setTimeout(() => off.remove(), 1500);
             }
         });
     }
-
-    // Card snippet message refined (no emoji)
-    const cards = document.querySelectorAll('#homePage .resto-card');
-    const msgSpan = document.querySelector('#homePage div[style*="text-align: center"] span');
-    const reviewText = {
-        'Whataburger': "Whataburger: The Southern Bacon Double delivers robust flavor and remarkable portion size.",
-        'Wingstop': "Wingstop: Lemon Pepper wings are impeccably balanced, with a signature ranch dip.",
-        'Chick-fil-A': "Chick-fil-A: The original chicken sandwich remains a benchmark of consistency and taste."
-    };
-    cards.forEach(card => {
-        const nameEl = card.querySelector('.resto-name');
-        let key = nameEl ? nameEl.innerText.trim() : '';
-        let url = '';
-        if (key === 'Whataburger') url = 'https://whataburgers.us/';
-        else if (key === 'Wingstop') url = 'https://www.wingstop.com/menu';
-        else if (key === 'Chick-fil-A') url = 'https://www.chick-fil-a.com/menu';
-        card.addEventListener('click', (e) => {
-            e.stopPropagation();
-            if (msgSpan && reviewText[key]) {
-                msgSpan.innerHTML = `<i class="fas fa-comment-dots"></i> ${reviewText[key]} <br><small>access full menu</small>`;
-                setTimeout(() => { if (url) window.open(url, '_blank'); }, 100);
-                setTimeout(() => { if (msgSpan) msgSpan.innerHTML = `<i class="fas fa-info-circle"></i> Select any restaurant card to explore curated menus`; }, 3800);
-            } else if (url) window.open(url, '_blank');
-            card.style.transform = 'scale(0.98)';
-            setTimeout(() => { card.style.transform = ''; }, 120);
-        });
-    });
-    // Prevent propagation on inner interactive elements
-    document.querySelectorAll('#homePage .resto-card .feature-item, #homePage .resto-card .whataspecial, #homePage .resto-card .badge-limited, #homePage .resto-card .flavor-tag, #homePage .resto-card .card-header i').forEach(el => {
-        el.addEventListener('click', (e) => e.stopPropagation());
-    });
 </script>
 </body>
 </html>
