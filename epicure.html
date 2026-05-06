@@ -1,1 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>BIG BACKS | Epicure — The Art of Elevated Fast Food</title>
+    <meta name="description" content="Discover epicurean fast food selections: gourmet burgers, artisanal ingredients, and chef-inspired creations. Where fast food meets fine dining.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #F8F5F0;
+            color: #2C2824;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Refined Texture Background */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://www.transparenttextures.com/patterns/clean-gray-paper.png');
+            background-color: #FAF7F2;
+            opacity: 0.5;
+            z-index: -2;
+        }
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 20%, rgba(200, 180, 150, 0.08), transparent 70%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Elegant Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #E8DFD3; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb { background: #B89A6E; border-radius: 10px; }
+
+        /* Header */
+        .main-header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(250, 247, 242, 0.92);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid rgba(160, 135, 100, 0.25);
+        }
+        .header-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0.8rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+        .logo-area:hover { opacity: 0.8; }
+        .logo-icon {
+            font-size: 1.6rem;
+            color: #9E7F56;
+        }
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: -0.2px;
+            background: linear-gradient(135deg, #3A3026, #7A5F3E);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+        .nav-item {
+            font-weight: 500;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: color 0.2s;
+            color: #4F4237;
+            letter-spacing: 0.3px;
+            border-bottom: 1px solid transparent;
+            padding-bottom: 2px;
+        }
+        .nav-item:hover { color: #8B6F47; border-bottom-color: #C5AD8A; }
+        .nav-item.active {
+            color: #8B6F47;
+            border-bottom-color: #C5AD8A;
+        }
+        .header-cta {
+            background: #DBC9AE;
+            padding: 0.3rem 1.2rem;
+            border-radius: 30px;
+            color: #2E261E;
+            font-weight: 600;
+            border: none;
+        }
+        .header-cta:hover { background: #CBB692; color: #1F1A13; border-bottom: none; }
+
+        /* Main Container */
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 2rem 2rem 4rem;
+        }
+
+        /* Hero Section */
+        .epicure-hero {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        .gem-icon {
+            font-size: 2.5rem;
+            color: #C4A265;
+            margin-bottom: 0.5rem;
+        }
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 600;
+            color: #3A2A1C;
+            letter-spacing: -0.3px;
+            margin: 0.25rem 0;
+        }
+        .sub {
+            font-size: 0.9rem;
+            font-weight: 400;
+            font-style: italic;
+            color: #6F5A42;
+            max-width: 600px;
+            margin: 0.5rem auto 0;
+        }
+        .epicure-badge {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .badge-item {
+            background: rgba(235, 225, 210, 0.7);
+            backdrop-filter: blur(4px);
+            padding: 0.3rem 1.2rem;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #5D4832;
+        }
+
+        /* Section Title */
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin: 2rem 0 1.5rem;
+            border-left: 4px solid #C7A86B;
+            padding-left: 1rem;
+            color: #3B2D1D;
+        }
+
+        /* Epicure Grid Cards */
+        .epicure-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        .epicure-card {
+            background: rgba(255, 253, 248, 0.92);
+            backdrop-filter: blur(6px);
+            border-radius: 32px;
+            overflow: hidden;
+            transition: all 0.35s ease;
+            border: 1px solid rgba(180, 155, 115, 0.35);
+            cursor: pointer;
+            box-shadow: 0 8px 20px -8px rgba(0,0,0,0.05);
+        }
+        .epicure-card:hover {
+            transform: translateY(-8px);
+            border-color: #C7A86B;
+            background: #FFFFFF;
+            box-shadow: 0 20px 30px -12px rgba(80, 60, 35, 0.15);
+        }
+        .card-img {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            transition: transform 0.5s ease;
+        }
+        .epicure-card:hover .card-img {
+            transform: scale(1.02);
+        }
+        .shake-img { background-image: url('https://images.unsplash.com/photo-1551782450-17144efb9c50?w=800&auto=format'); background-position: 50% 55%; }
+        .fiveguys-img { background-image: url('https://images.unsplash.com/photo-1550317138-10000687a72b?w=800&auto=format'); background-position: 50% 50%; }
+        .habit-img { background-image: url('https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=800&auto=format'); background-position: 50% 45%; }
+        .sweetgreen-img { background-image: url('https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800&auto=format'); background-position: 50% 50%; }
+        .card-img-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.5), transparent);
+            padding: 1rem 1rem 0.5rem;
+            color: #F5EADB;
+            font-size: 0.7rem;
+            font-weight: 500;
+            text-align: right;
+        }
+        .card-content {
+            padding: 1.4rem;
+        }
+        .card-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #3D2B1A;
+            margin-bottom: 0.4rem;
+        }
+        .card-desc {
+            color: #6F5B44;
+            font-size: 0.85rem;
+            line-height: 1.45;
+            margin-bottom: 1rem;
+        }
+        .card-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #EFE3D4;
+            padding-top: 0.8rem;
+            font-size: 0.7rem;
+        }
+        .pairing {
+            background: #E8DDCE;
+            padding: 0.2rem 0.8rem;
+            border-radius: 30px;
+            color: #6B4F30;
+            font-weight: 500;
+        }
+        .price {
+            color: #8B6E48;
+            font-weight: 500;
+        }
+
+        /* Sommelier's Choice Section */
+        .sommelier-section {
+            background: linear-gradient(115deg, #F5EDE2, #FEF8EF);
+            border-radius: 48px;
+            padding: 2rem;
+            margin: 2rem 0;
+            border: 1px solid #DDCFB8;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .sommelier-text {
+            flex: 2;
+        }
+        .sommelier-text h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.7rem;
+            color: #2D2419;
+        }
+        .sommelier-text p {
+            color: #6B553D;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+        }
+        .sommelier-note {
+            display: inline-block;
+            background: #E8DDCE;
+            padding: 0.2rem 1rem;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            margin-top: 0.6rem;
+        }
+        .sommelier-btn {
+            background: #C7A86B;
+            border: none;
+            padding: 0.7rem 1.8rem;
+            border-radius: 50px;
+            font-weight: 600;
+            color: white;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .sommelier-btn:hover {
+            background: #B08D55;
+            transform: scale(1.02);
+        }
+
+        /* Tasting Notes Row */
+        .tasting-notes {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 1.5rem 0;
+        }
+        .note {
+            background: #EAE1D3;
+            border-radius: 40px;
+            padding: 0.4rem 1.2rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #5F4932;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            font-size: 0.7rem;
+            color: #8F7C66;
+            border-top: 1px solid #E0D3C4;
+            padding-top: 2rem;
+        }
+
+        @media (max-width: 780px) {
+            .container { padding: 1rem; }
+            h1 { font-size: 2.4rem; }
+            .section-title { font-size: 1.5rem; }
+            .card-title { font-size: 1.3rem; }
+            .sommelier-section { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="main-header">
+    <div class="header-container">
+        <div class="logo-area" onclick="window.location.href='#';">
+            <i class="fas fa-utensil-spoon logo-icon"></i>
+            <span class="logo-text">BIG BACKS</span>
+        </div>
+        <div class="nav-links">
+            <span class="nav-item" onclick="window.location.href='#';">HOME</span>
+            <span class="nav-item" onclick="window.location.href='#';">RANKINGS</span>
+            <span class="nav-item active" onclick="window.location.href='#';">EPICURE</span>
+            <span class="nav-item header-cta" onclick="window.location.href='#';">THE FEAST</span>
+        </div>
+    </div>
+</header>
+
+<main class="container">
+    <div class="epicure-hero">
+        <div class="gem-icon">
+            <i class="far fa-gem"></i>
+        </div>
+        <h1>Epicurean Selections</h1>
+        <div class="sub">Where fast food meets gastronomy — curated for the refined palate</div>
+        <div class="epicure-badge">
+            <span class="badge-item"><i class="fas fa-wine-glass-alt"></i> Artisanal Ingredients</span>
+            <span class="badge-item"><i class="fas fa-cheese"></i> Chef-inspired Twists</span>
+            <span class="badge-item"><i class="fas fa-seedling"></i> Elevated Classics</span>
+        </div>
+    </div>
+
+    <div class="section-title">
+        <i class="fas fa-utensils"></i> The Epicure Collection
+    </div>
+
+    <div class="epicure-grid" id="epicureGrid">
+        <!-- Cards will be populated by JS -->
+    </div>
+
+    <!-- Tasting Notes -->
+    <div class="tasting-notes">
+        <span class="note"><i class="fas fa-leaf"></i> Truffle aioli pairing</span>
+        <span class="note"><i class="fas fa-wine-bottle"></i> Craft soda pairing</span>
+        <span class="note"><i class="fas fa-pepper-hot"></i> Smoked paprika essence</span>
+        <span class="note"><i class="fas fa-cheese"></i> Aged cheddar notes</span>
+    </div>
+
+    <!-- Sommelier's Choice Section -->
+    <div class="sommelier-section" id="sommelierChoice">
+        <div class="sommelier-text">
+            <h3><i class="fas fa-star-of-life"></i> Sommelier's Pick</h3>
+            <p><strong>The Black Truffle Burger</strong> — Wagyu beef, black truffle aioli, caramelized onions, brie cheese on brioche. Limited availability.</p>
+            <p style="font-size:0.8rem; margin-top: 6px;">✨ "A symphony of umami and luxury" — BIG BACKS Epicurean Panel</p>
+            <span class="sommelier-note"><i class="fas fa-clock"></i> Seasonal offering</span>
+        </div>
+        <button class="sommelier-btn" id="truffleBtn">Explore this masterpiece →</button>
+    </div>
+
+    <footer>
+        <i class="fas fa-utensil-spoon"></i> BIG BACKS EPICURE — celebrating the artistry of fast food. Every card leads to curated menus.
+    </footer>
+</main>
+
+<script>
+    // Epicure data
+    const epicureData = [
+        {
+            id: 1,
+            name: "Shake Shack",
+            description: "100% all-natural Angus beef, non-GMO potato buns, and house-made lemonade. The ShackBurger is a modern classic with ShackSauce.",
+            priceRange: "$$$",
+            pairing: "Artisanal",
+            link: "https://www.shakeshack.com/menu",
+            imgClass: "shake-img",
+            icon: "🍔"
+        },
+        {
+            id: 2,
+            name: "Five Guys",
+            description: "Fresh, never frozen beef patties pressed to order. Customizable toppings and hand-cut fries cooked in pure peanut oil.",
+            priceRange: "$$",
+            pairing: "Craft Burger",
+            link: "https://www.fiveguys.com/menu",
+            imgClass: "fiveguys-img",
+            icon: "🥩"
+        },
+        {
+            id: 3,
+            name: "The Habit Burger Grill",
+            description: "Charbroiled over an open flame, Santa Barbara-style. Double Char with caramelized onions and fresh produce.",
+            priceRange: "$$",
+            pairing: "Charbroiled",
+            link: "https://www.thehabit.com/menu",
+            imgClass: "habit-img",
+            icon: "🔥"
+        },
+        {
+            id: 4,
+            name: "Sweetgreen",
+            description: "Seasonal, locally-sourced ingredients. Harvest bowl with wild rice, roasted chicken, and spicy cashew dressing.",
+            priceRange: "$$",
+            pairing: "Fresh & Wholesome",
+            link: "https://www.sweetgreen.com/menu",
+            imgClass: "sweetgreen-img",
+            icon: "🥗"
+        }
+    ];
+
+    // Render Epicure Cards
+    function renderEpicureCards() {
+        const grid = document.getElementById('epicureGrid');
+        if (!grid) return;
+        
+        grid.innerHTML = epicureData.map(item => `
+            <div class="epicure-card" data-link="${item.link}" data-name="${escapeHtml(item.name)}">
+                <div class="card-img ${item.imgClass}">
+                    <div class="card-img-overlay">${item.icon} Epicure Selection</div>
+                </div>
+                <div class="card-content">
+                    <div class="card-title">${escapeHtml(item.name)}</div>
+                    <div class="card-desc">${escapeHtml(item.description)}</div>
+                    <div class="card-meta">
+                        <span class="pairing"><i class="fas fa-tag"></i> ${item.pairing}</span>
+                        <span class="price">${item.priceRange}</span>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+        
+        // Attach click handlers
+        document.querySelectorAll('.epicure-card').forEach(card => {
+            card.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const link = card.getAttribute('data-link');
+                const name = card.getAttribute('data-name');
+                if (link) {
+                    showToast(`🍽️ Exploring ${name} — epicurean delight awaits`);
+                    setTimeout(() => { window.open(link, '_blank'); }, 150);
+                }
+            });
+        });
+    }
+    
+    // Escape HTML helper
+    function escapeHtml(str) {
+        if (!str) return '';
+        return str.replace(/[&<>]/g, function(m) {
+            if (m === '&') return '&amp;';
+            if (m === '<') return '&lt;';
+            if (m === '>') return '&gt;';
+            return m;
+        });
+    }
+    
+    // Toast notification
+    function showToast(message) {
+        let existingToast = document.querySelector('.epicure-toast');
+        if (existingToast) existingToast.remove();
+        const toast = document.createElement('div');
+        toast.className = 'epicure-toast';
+        toast.innerText = message;
+        toast.style.cssText = 'position:fixed; bottom:24px; left:50%; transform:translateX(-50%); background:#2C241E; color:#F2E6D8; padding:10px 22px; border-radius:50px; font-size:0.75rem; font-weight:500; z-index:9999; backdrop-filter:blur(8px); border:1px solid #C9AE82;';
+        document.body.appendChild(toast);
+        setTimeout(() => {
+            toast.style.opacity = '0';
+            setTimeout(() => toast.remove(), 300);
+        }, 2200);
+    }
+    
+    // Sommelier button handler
+    function initSommelierButton() {
+        const btn = document.getElementById('truffleBtn');
+        if (btn) {
+            btn.addEventListener('click', () => {
+                showToast(`🍔 The Black Truffle Burger — the pinnacle of fast-food luxury. Exploring menu...`);
+                setTimeout(() => { window.open('https://www.shakeshack.com/menu', '_blank'); }, 200);
+            });
+        }
+    }
+    
+    // Navigation handlers (placeholder for full site integration)
+    function setupNavHandlers() {
+        const homeLink = document.querySelector('.nav-links span:nth-child(1)');
+        const rankingsLink = document.querySelector('.nav-links span:nth-child(2)');
+        const feastLink = document.querySelector('.header-cta');
+        const logo = document.querySelector('.logo-area');
+        
+        if (homeLink) {
+            homeLink.addEventListener('click', () => {
+                showToast("🏠 Welcome to BIG BACKS — discover epicurean excellence.");
+            });
+        }
+        if (rankingsLink) {
+            rankingsLink.addEventListener('click', () => {
+                showToast("🏆 Explore our definitive fast food rankings.");
+            });
+        }
+        if (feastLink) {
+            feastLink.addEventListener('click', () => {
+                showToast("🍔 The Grand Feast — ultimate indulgence awaits.");
+            });
+        }
+        if (logo) {
+            logo.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        }
+    }
+    
+    // Initialize on load
+    document.addEventListener('DOMContentLoaded', () => {
+        renderEpicureCards();
+        initSommelierButton();
+        setupNavHandlers();
+    });
+</script>
+</body>
+</html>
