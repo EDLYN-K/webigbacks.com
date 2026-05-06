@@ -230,7 +230,6 @@
         .chicken-img { background-image: url('https://images.unsplash.com/photo-1562967916-eb82221dfb92?w=800&auto=format'); background-position: 50% 45%; }
         .pizza-img { background-image: url('https://images.unsplash.com/photo-1513104890138-7c749659a591?w=800&auto=format'); background-position: 50% 50%; }
         .taco-img { background-image: url('https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?w=800&auto=format'); background-position: 50% 50%; }
-        .fries-img { background-image: url('https://images.unsplash.com/photo-1630384060421-cb20c0e0649d?w=800&auto=format'); background-position: 50% 50%; }
         .img-overlay {
             position: absolute;
             bottom: 0;
@@ -372,15 +371,15 @@
 
 <header class="main-header">
     <div class="header-container">
-        <div class="logo-area" onclick="window.location.href='#';">
+        <div class="logo-area" onclick="window.location.href='index.html';">
             <i class="fas fa-utensil-spoon logo-icon"></i>
             <span class="logo-text">BIG BACKS</span>
         </div>
         <div class="nav-links">
-            <span class="nav-item" onclick="window.location.href='#';">HOME</span>
-            <span class="nav-item" onclick="window.location.href='#';">RANKINGS</span>
-            <span class="nav-item" onclick="window.location.href='#';">EPICURE</span>
-            <span class="nav-item header-cta active" onclick="window.location.href='#';">THE FEAST</span>
+            <span class="nav-item" onclick="window.location.href='home.html';">HOME</span>
+            <span class="nav-item" onclick="window.location.href='rankings.html';">RANKINGS</span>
+            <span class="nav-item" onclick="window.location.href='epicure.html';">EPICURE</span>
+            <span class="nav-item header-cta active" onclick="window.location.href='thefeast.html';">THE FEAST</span>
         </div>
     </div>
 </header>
@@ -407,7 +406,6 @@
         <span class="filter-chip" data-filter="wings">Wings</span>
         <span class="filter-chip" data-filter="pizza">Pizza</span>
         <span class="filter-chip" data-filter="tacos">Tacos</span>
-        <span class="filter-chip" data-filter="sides">Sides</span>
     </div>
 
     <!-- Feast Items Grid -->
@@ -435,6 +433,7 @@
 
 <script>
     // Feast Database: Daily foods people love with pricing and regional presence
+    // (Removed Loaded Nacho Fries - item id 10)
     const feastData = [
         { id: 1, name: "Classic Double Cheeseburger", description: "Juicy double patty, melted cheddar, caramelized onions, pickles, and special sauce on a toasted brioche bun.", price: "$8.99", locations: "Nationwide (5,000+ locations)", category: "burger", link: "https://www.whataburger.com/menu", tags: ["All-American", "Lunch Favorite"], imgClass: "burger-img" },
         { id: 2, name: "Buffalo Wings (12pc)", description: "Crispy chicken wings tossed in signature Buffalo sauce. Served with celery sticks and creamy blue cheese or ranch.", price: "$14.99", locations: "Every state | Wingstop, BWW", category: "wings", link: "https://www.wingstop.com/menu", tags: ["Game Day", "Spicy"], imgClass: "wings-img" },
@@ -444,8 +443,7 @@
         { id: 6, name: "Loaded Bacon Cheeseburger", description: "Triple stack with crispy bacon, American cheese, lettuce, tomato, and smoky BBQ sauce.", price: "$11.49", locations: "Widely available | Five Guys, Shake Shack", category: "burger", link: "https://www.fiveguys.com/menu", tags: ["Hearty", "Bacon Lover"], imgClass: "burger-img" },
         { id: 7, name: "Lemon Pepper Wings (Family Pack)", description: "20 wings tossed in lemon pepper seasoning, served with seasoned fries and ranch.", price: "$24.99", locations: "Nationwide | Wingstop, local chains", category: "wings", link: "https://www.wingstop.com/flavors/lemon-pepper", tags: ["Flavor Explosion", "Shareable"], imgClass: "wings-img" },
         { id: 8, name: "Spicy Chicken Sandwich Combo", description: "Crispy spicy chicken, pickles, mayo on a potato bun + waffle fries & drink.", price: "$8.49", locations: "All 50 states | Popeyes, Chick-fil-A", category: "chicken", link: "https://www.popeyes.com/menu", tags: ["Spicy", "Value Meal"], imgClass: "chicken-img" },
-        { id: 9, name: "Supreme Taco Box", description: "12 crunchy tacos with seasoned beef, sour cream, tomatoes, and shredded cheese.", price: "$19.99", locations: "Nationwide | Taco Bell, Del Taco", category: "tacos", link: "https://www.tacobell.com/food", tags: ["Party Pack", "Crowd Pleaser"], imgClass: "taco-img" },
-        { id: 10, name: "Loaded Nacho Fries", description: "Seasoned fries topped with beef, nacho cheese, jalapeños, pico de gallo, and creamy sauce.", price: "$5.99", locations: "Select locations | Taco Bell, regional chains", category: "sides", link: "https://www.tacobell.com/food", tags: ["Shareable", "Cheesy"], imgClass: "fries-img" }
+        { id: 9, name: "Supreme Taco Box", description: "12 crunchy tacos with seasoned beef, sour cream, tomatoes, and shredded cheese.", price: "$19.99", locations: "Nationwide | Taco Bell, Del Taco", category: "tacos", link: "https://www.tacobell.com/food", tags: ["Party Pack", "Crowd Pleaser"], imgClass: "taco-img" }
     ];
 
     // Current filter
@@ -525,7 +523,6 @@
             chip.addEventListener('click', () => {
                 const city = chip.getAttribute('data-city');
                 showToast(`🍽️ Showing feasts available in ${city} — tap any card to see local pricing`);
-                // Optional: In a full app, you could filter by region. Here we just scroll to feast grid.
                 document.querySelector('.feast-grid').scrollIntoView({ behavior: 'smooth', block: 'start' });
             });
         });
@@ -556,7 +553,7 @@
         });
     }
     
-    // Navigation handlers
+    // Navigation handlers for inter-page links
     function setupNavHandlers() {
         const homeLink = document.querySelector('.nav-links span:nth-child(1)');
         const rankingsLink = document.querySelector('.nav-links span:nth-child(2)');
@@ -565,22 +562,22 @@
         
         if (homeLink) {
             homeLink.addEventListener('click', () => {
-                showToast("🏠 Welcome to BIG BACKS — explore The Feast for daily cravings.");
+                window.location.href = 'home.html';
             });
         }
         if (rankingsLink) {
             rankingsLink.addEventListener('click', () => {
-                showToast("🏆 Discover definitive rankings of America's best fast food.");
+                window.location.href = 'rankings.html';
             });
         }
         if (epicureLink) {
             epicureLink.addEventListener('click', () => {
-                showToast("✨ Epicurean selections — where fast food meets fine dining.");
+                window.location.href = 'epicure.html';
             });
         }
         if (logo) {
             logo.addEventListener('click', () => {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+                window.location.href = 'index.html';
             });
         }
     }
