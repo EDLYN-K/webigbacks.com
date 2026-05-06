@@ -1,1 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>BIG BACKS | The Feast — America's Most Beloved Daily Foods</title>
+    <meta name="description" content="Discover The Feast: a curated guide to America's most beloved daily foods — from burgers and wings to tacos and fried chicken. Find pricing and locations across the USA.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #FEF9F2;
+            color: #2C2824;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Warm, inviting background texture */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://www.transparenttextures.com/patterns/clean-gray-paper.png');
+            background-color: #FDF8F0;
+            opacity: 0.4;
+            z-index: -2;
+        }
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 70% 40%, rgba(220, 190, 140, 0.08), transparent 70%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Elegant Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #E8DFD3; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb { background: #C4A56E; border-radius: 10px; }
+
+        /* Header */
+        .main-header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(253, 249, 242, 0.92);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid rgba(180, 150, 110, 0.25);
+        }
+        .header-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0.8rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+        .logo-area:hover { opacity: 0.8; }
+        .logo-icon {
+            font-size: 1.6rem;
+            color: #B28B5E;
+        }
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: -0.2px;
+            background: linear-gradient(135deg, #3A3026, #7A5F3E);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+        .nav-item {
+            font-weight: 500;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: color 0.2s;
+            color: #4F4237;
+            letter-spacing: 0.3px;
+            border-bottom: 1px solid transparent;
+            padding-bottom: 2px;
+        }
+        .nav-item:hover { color: #B28B5E; border-bottom-color: #C5AD8A; }
+        .nav-item.active {
+            color: #B28B5E;
+            border-bottom-color: #C5AD8A;
+        }
+        .header-cta {
+            background: #DDCEB4;
+            padding: 0.3rem 1.2rem;
+            border-radius: 30px;
+            color: #2E261E;
+            font-weight: 600;
+            border: none;
+        }
+        .header-cta:hover { background: #CFBA98; color: #1F1A13; }
+
+        /* Main Container */
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 2rem 2rem 4rem;
+        }
+
+        /* Hero Section */
+        .feast-hero {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        .feast-icon {
+            font-size: 2.8rem;
+            color: #C4A265;
+            margin-bottom: 0.5rem;
+        }
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 600;
+            color: #3A2A1C;
+            letter-spacing: -0.3px;
+            margin: 0.25rem 0;
+        }
+        .sub {
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: #6F5A42;
+            max-width: 650px;
+            margin: 0.5rem auto 0;
+        }
+        .stats-row {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .stat-badge {
+            background: rgba(235, 225, 210, 0.7);
+            backdrop-filter: blur(4px);
+            padding: 0.3rem 1.2rem;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #5D4832;
+        }
+
+        /* Filter Section */
+        .filter-section {
+            display: flex;
+            justify-content: center;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+        .filter-chip {
+            background: transparent;
+            border: 1px solid #D1C0A8;
+            padding: 0.5rem 1.2rem;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #5A4732;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .filter-chip.active, .filter-chip:hover {
+            background: #C7A86B;
+            border-color: #C7A86B;
+            color: white;
+        }
+
+        /* Feast Grid - Daily Food Cards */
+        .feast-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        .feast-card {
+            background: #FFFFFF;
+            border-radius: 28px;
+            overflow: hidden;
+            transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
+            border: 1px solid #E6DBCF;
+            cursor: pointer;
+        }
+        .feast-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 30px -12px rgba(60, 45, 30, 0.15);
+            border-color: #C7A86B;
+        }
+        .card-img {
+            height: 190px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        /* Food photography */
+        .burger-img { background-image: url('https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=800&auto=format'); background-position: 50% 50%; }
+        .wings-img { background-image: url('https://images.unsplash.com/photo-1608039755401-742074f0548d?w=800&auto=format'); background-position: 50% 50%; }
+        .chicken-img { background-image: url('https://images.unsplash.com/photo-1562967916-eb82221dfb92?w=800&auto=format'); background-position: 50% 45%; }
+        .pizza-img { background-image: url('https://images.unsplash.com/photo-1513104890138-7c749659a591?w=800&auto=format'); background-position: 50% 50%; }
+        .taco-img { background-image: url('https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?w=800&auto=format'); background-position: 50% 50%; }
+        .fries-img { background-image: url('https://images.unsplash.com/photo-1630384060421-cb20c0e0649d?w=800&auto=format'); background-position: 50% 50%; }
+        .img-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.5), transparent);
+            padding: 1rem 1rem 0.5rem;
+            color: #F5EADB;
+            font-size: 0.7rem;
+            font-weight: 500;
+            text-align: right;
+        }
+        .card-content {
+            padding: 1.2rem 1.4rem 1.4rem;
+        }
+        .card-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #3D2B1A;
+            margin-bottom: 0.3rem;
+        }
+        .card-desc {
+            color: #6F5B44;
+            font-size: 0.85rem;
+            line-height: 1.45;
+            margin-bottom: 0.8rem;
+        }
+        .price-location {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 0.8rem 0;
+        }
+        .price {
+            background: #EBE1D4;
+            padding: 0.2rem 0.8rem;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #5C4832;
+        }
+        .location-badge {
+            background: #F4EFE7;
+            padding: 0.2rem 0.8rem;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: #8B6E48;
+        }
+        .location-badge i {
+            margin-right: 4px;
+        }
+        .feature-tag {
+            display: inline-block;
+            background: #F6F0E8;
+            padding: 0.2rem 0.7rem;
+            border-radius: 20px;
+            font-size: 0.65rem;
+            color: #735F48;
+            margin-right: 0.5rem;
+            margin-top: 0.3rem;
+        }
+        .card-footer {
+            border-top: 1px solid #EFE3D4;
+            padding-top: 0.8rem;
+            margin-top: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .find-link {
+            font-size: 0.7rem;
+            color: #C7A86B;
+            font-weight: 500;
+        }
+
+        /* Featured Section - Map & Locations Overview */
+        .featured-locations {
+            background: #F5EFE7;
+            border-radius: 36px;
+            padding: 1.8rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+        .featured-locations h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: #3D3124;
+        }
+        .featured-locations p {
+            font-size: 0.8rem;
+            color: #6A5A48;
+            margin-top: 0.3rem;
+        }
+        .location-grid {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-top: 1.2rem;
+        }
+        .location-chip {
+            background: white;
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: #5C4A38;
+            border: 0.5px solid #D6C5AE;
+            cursor: pointer;
+        }
+        .location-chip:hover {
+            background: #C7A86B;
+            color: white;
+            border-color: #C7A86B;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            font-size: 0.7rem;
+            color: #8F7C66;
+            border-top: 1px solid #E0D3C4;
+            padding-top: 2rem;
+        }
+
+        @media (max-width: 780px) {
+            .container { padding: 1rem; }
+            h1 { font-size: 2.4rem; }
+            .feast-grid { grid-template-columns: 1fr; }
+            .price-location { flex-direction: column; align-items: flex-start; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="main-header">
+    <div class="header-container">
+        <div class="logo-area" onclick="window.location.href='#';">
+            <i class="fas fa-utensil-spoon logo-icon"></i>
+            <span class="logo-text">BIG BACKS</span>
+        </div>
+        <div class="nav-links">
+            <span class="nav-item" onclick="window.location.href='#';">HOME</span>
+            <span class="nav-item" onclick="window.location.href='#';">RANKINGS</span>
+            <span class="nav-item" onclick="window.location.href='#';">EPICURE</span>
+            <span class="nav-item header-cta active" onclick="window.location.href='#';">THE FEAST</span>
+        </div>
+    </div>
+</header>
+
+<main class="container">
+    <div class="feast-hero">
+        <div class="feast-icon">
+            <i class="fas fa-utensils"></i>
+        </div>
+        <h1>The Grand Feast</h1>
+        <div class="sub">America's most beloved daily foods — curated by popularity, flavor, and regional pride. Find pricing and locations nationwide.</div>
+        <div class="stats-row">
+            <span class="stat-badge"><i class="fas fa-map-marker-alt"></i> 50 States Coverage</span>
+            <span class="stat-badge"><i class="fas fa-dollar-sign"></i> Real-time pricing</span>
+            <span class="stat-badge"><i class="fas fa-fire"></i> Daily cravings</span>
+        </div>
+    </div>
+
+    <!-- Filter by Food Type -->
+    <div class="filter-section" id="filterSection">
+        <span class="filter-chip active" data-filter="all">All Feasts</span>
+        <span class="filter-chip" data-filter="burger">Burgers</span>
+        <span class="filter-chip" data-filter="chicken">Chicken</span>
+        <span class="filter-chip" data-filter="wings">Wings</span>
+        <span class="filter-chip" data-filter="pizza">Pizza</span>
+        <span class="filter-chip" data-filter="tacos">Tacos</span>
+        <span class="filter-chip" data-filter="sides">Sides</span>
+    </div>
+
+    <!-- Feast Items Grid -->
+    <div id="feastGrid" class="feast-grid"></div>
+
+    <!-- Featured Locations Section -->
+    <div class="featured-locations">
+        <h3><i class="fas fa-map-marked-alt"></i> Find These Feasts Near You</h3>
+        <p>Popular locations across the United States — tap any city to explore local favorites</p>
+        <div class="location-grid" id="locationGrid">
+            <span class="location-chip" data-city="New York">🗽 New York</span>
+            <span class="location-chip" data-city="Los Angeles">🌴 Los Angeles</span>
+            <span class="location-chip" data-city="Chicago">🌆 Chicago</span>
+            <span class="location-chip" data-city="Houston">🤠 Houston</span>
+            <span class="location-chip" data-city="Miami">🏖️ Miami</span>
+            <span class="location-chip" data-city="Seattle">☕ Seattle</span>
+            <span class="location-chip" data-city="Atlanta">🍑 Atlanta</span>
+        </div>
+    </div>
+
+    <footer>
+        <i class="fas fa-utensil-spoon"></i> BIG BACKS — The Feast: where cravings meet the open road. All items link to official menus and location finders.
+    </footer>
+</main>
+
+<script>
+    // Feast Database: Daily foods people love with pricing and regional presence
+    const feastData = [
+        { id: 1, name: "Classic Double Cheeseburger", description: "Juicy double patty, melted cheddar, caramelized onions, pickles, and special sauce on a toasted brioche bun.", price: "$8.99", locations: "Nationwide (5,000+ locations)", category: "burger", link: "https://www.whataburger.com/menu", tags: ["All-American", "Lunch Favorite"], imgClass: "burger-img" },
+        { id: 2, name: "Buffalo Wings (12pc)", description: "Crispy chicken wings tossed in signature Buffalo sauce. Served with celery sticks and creamy blue cheese or ranch.", price: "$14.99", locations: "Every state | Wingstop, BWW", category: "wings", link: "https://www.wingstop.com/menu", tags: ["Game Day", "Spicy"], imgClass: "wings-img" },
+        { id: 3, name: "Original Chicken Sandwich", description: "Hand-breaded chicken breast, pressure-cooked, served on a buttered bun with pickle chips.", price: "$5.79", locations: "All 50 states | Chick-fil-A", category: "chicken", link: "https://www.chick-fil-a.com/menu", tags: ["Classic", "Drive-Thru"], imgClass: "chicken-img" },
+        { id: 4, name: "Pepperoni Stuffed Crust Pizza", description: "Large pizza loaded with pepperoni, mozzarella, and a ring of cheese-stuffed crust.", price: "$16.99", locations: "Nationwide | Pizza Hut, Domino's", category: "pizza", link: "https://www.pizzahut.com/menu", tags: ["Family Size", "Cheesy"], imgClass: "pizza-img" },
+        { id: 5, name: "Crunchy Tacos (3-pack)", description: "Crispy corn shells filled with seasoned beef, lettuce, shredded cheese, and signature sauce.", price: "$4.49", locations: "All regions | Taco Bell", category: "tacos", link: "https://www.tacobell.com/food", tags: ["Budget Feast", "Late Night"], imgClass: "taco-img" },
+        { id: 6, name: "Loaded Bacon Cheeseburger", description: "Triple stack with crispy bacon, American cheese, lettuce, tomato, and smoky BBQ sauce.", price: "$11.49", locations: "Widely available | Five Guys, Shake Shack", category: "burger", link: "https://www.fiveguys.com/menu", tags: ["Hearty", "Bacon Lover"], imgClass: "burger-img" },
+        { id: 7, name: "Lemon Pepper Wings (Family Pack)", description: "20 wings tossed in lemon pepper seasoning, served with seasoned fries and ranch.", price: "$24.99", locations: "Nationwide | Wingstop, local chains", category: "wings", link: "https://www.wingstop.com/flavors/lemon-pepper", tags: ["Flavor Explosion", "Shareable"], imgClass: "wings-img" },
+        { id: 8, name: "Spicy Chicken Sandwich Combo", description: "Crispy spicy chicken, pickles, mayo on a potato bun + waffle fries & drink.", price: "$8.49", locations: "All 50 states | Popeyes, Chick-fil-A", category: "chicken", link: "https://www.popeyes.com/menu", tags: ["Spicy", "Value Meal"], imgClass: "chicken-img" },
+        { id: 9, name: "Supreme Taco Box", description: "12 crunchy tacos with seasoned beef, sour cream, tomatoes, and shredded cheese.", price: "$19.99", locations: "Nationwide | Taco Bell, Del Taco", category: "tacos", link: "https://www.tacobell.com/food", tags: ["Party Pack", "Crowd Pleaser"], imgClass: "taco-img" },
+        { id: 10, name: "Loaded Nacho Fries", description: "Seasoned fries topped with beef, nacho cheese, jalapeños, pico de gallo, and creamy sauce.", price: "$5.99", locations: "Select locations | Taco Bell, regional chains", category: "sides", link: "https://www.tacobell.com/food", tags: ["Shareable", "Cheesy"], imgClass: "fries-img" }
+    ];
+
+    // Current filter
+    let currentFilter = "all";
+
+    // Render feast cards based on filter
+    function renderFeastCards(filter = "all") {
+        const container = document.getElementById('feastGrid');
+        if (!container) return;
+        
+        let filteredData = [...feastData];
+        if (filter !== "all") {
+            filteredData = feastData.filter(item => item.category === filter);
+        }
+        
+        if (filteredData.length === 0) {
+            container.innerHTML = `<div style="text-align:center; padding:2rem; background:#FBF8F2; border-radius:48px;">✨ No feasts match this category — try another craving ✨</div>`;
+            return;
+        }
+        
+        container.innerHTML = filteredData.map(item => `
+            <div class="feast-card" data-category="${item.category}" data-link="${item.link}" data-name="${escapeHtml(item.name)}">
+                <div class="card-img ${item.imgClass}">
+                    <div class="img-overlay">🔥 Daily Favorite</div>
+                </div>
+                <div class="card-content">
+                    <div class="card-title">${escapeHtml(item.name)}</div>
+                    <div class="card-desc">${escapeHtml(item.description)}</div>
+                    <div class="price-location">
+                        <span class="price"><i class="fas fa-tag"></i> ${item.price}</span>
+                        <span class="location-badge"><i class="fas fa-map-marker-alt"></i> ${escapeHtml(item.locations)}</span>
+                    </div>
+                    <div>
+                        ${item.tags.map(tag => `<span class="feature-tag">#${escapeHtml(tag)}</span>`).join('')}
+                    </div>
+                    <div class="card-footer">
+                        <span class="find-link"><i class="fas fa-chevron-right"></i> Find near me</span>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+        
+        // Attach click handlers
+        document.querySelectorAll('.feast-card').forEach(card => {
+            card.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const link = card.getAttribute('data-link');
+                const name = card.getAttribute('data-name');
+                if (link) {
+                    showToast(`📍 ${name} — opening location finder & menu`);
+                    setTimeout(() => { window.open(link, '_blank'); }, 150);
+                }
+            });
+        });
+    }
+    
+    // Initialize filters
+    function initFilters() {
+        const filterChips = document.querySelectorAll('.filter-chip');
+        filterChips.forEach(chip => {
+            chip.addEventListener('click', () => {
+                const filterValue = chip.getAttribute('data-filter');
+                currentFilter = filterValue;
+                filterChips.forEach(c => c.classList.remove('active'));
+                chip.classList.add('active');
+                renderFeastCards(filterValue);
+                // Smooth scroll to grid
+                document.querySelector('.feast-grid').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+    }
+    
+    // Location chips interaction
+    function initLocationChips() {
+        const locationChips = document.querySelectorAll('.location-chip');
+        locationChips.forEach(chip => {
+            chip.addEventListener('click', () => {
+                const city = chip.getAttribute('data-city');
+                showToast(`🍽️ Showing feasts available in ${city} — tap any card to see local pricing`);
+                // Optional: In a full app, you could filter by region. Here we just scroll to feast grid.
+                document.querySelector('.feast-grid').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+    }
+    
+    // Toast notification helper
+    function showToast(message) {
+        let existingToast = document.querySelector('.feast-toast');
+        if (existingToast) existingToast.remove();
+        const toast = document.createElement('div');
+        toast.className = 'feast-toast';
+        toast.innerText = message;
+        toast.style.cssText = 'position:fixed; bottom:24px; left:50%; transform:translateX(-50%); background:#2C241E; color:#F2E6D8; padding:10px 22px; border-radius:50px; font-size:0.75rem; font-weight:500; z-index:9999; backdrop-filter:blur(8px); border:1px solid #C9AE82;';
+        document.body.appendChild(toast);
+        setTimeout(() => {
+            toast.style.opacity = '0';
+            setTimeout(() => toast.remove(), 300);
+        }, 2200);
+    }
+    
+    function escapeHtml(str) {
+        if (!str) return '';
+        return str.replace(/[&<>]/g, function(m) {
+            if (m === '&') return '&amp;';
+            if (m === '<') return '&lt;';
+            if (m === '>') return '&gt;';
+            return m;
+        });
+    }
+    
+    // Navigation handlers
+    function setupNavHandlers() {
+        const homeLink = document.querySelector('.nav-links span:nth-child(1)');
+        const rankingsLink = document.querySelector('.nav-links span:nth-child(2)');
+        const epicureLink = document.querySelector('.nav-links span:nth-child(3)');
+        const logo = document.querySelector('.logo-area');
+        
+        if (homeLink) {
+            homeLink.addEventListener('click', () => {
+                showToast("🏠 Welcome to BIG BACKS — explore The Feast for daily cravings.");
+            });
+        }
+        if (rankingsLink) {
+            rankingsLink.addEventListener('click', () => {
+                showToast("🏆 Discover definitive rankings of America's best fast food.");
+            });
+        }
+        if (epicureLink) {
+            epicureLink.addEventListener('click', () => {
+                showToast("✨ Epicurean selections — where fast food meets fine dining.");
+            });
+        }
+        if (logo) {
+            logo.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        }
+    }
+    
+    // Initialize on load
+    document.addEventListener('DOMContentLoaded', () => {
+        renderFeastCards('all');
+        initFilters();
+        initLocationChips();
+        setupNavHandlers();
+    });
+</script>
+</body>
+</html>
