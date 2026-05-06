@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -77,6 +78,7 @@
             gap: 10px;
             cursor: pointer;
             transition: opacity 0.2s;
+            text-decoration: none;
         }
         .logo-area:hover { opacity: 0.8; }
         .logo-icon {
@@ -107,6 +109,7 @@
             letter-spacing: 0.3px;
             border-bottom: 1px solid transparent;
             padding-bottom: 2px;
+            text-decoration: none;
         }
         .nav-item:hover { color: #B28B5E; border-bottom-color: #C5AD8A; }
         .nav-item.active {
@@ -226,7 +229,8 @@
         }
         /* Food photography */
         .burger-img { background-image: url('https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=800&auto=format'); background-position: 50% 50%; }
-        .wings-img { background-image: url('https://images.unsplash.com/photo-1608039755401-742074f0548d?w=800&auto=format'); background-position: 50% 50%; }
+        .buffalo-wings-img { background-image: url('https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?w=800&auto=format'); background-position: 50% 50%; }
+        .lemon-pepper-img { background-image: url('https://images.unsplash.com/photo-1589919586533-6b6717158d56?w=800&auto=format'); background-position: 50% 50%; }
         .chicken-img { background-image: url('https://images.unsplash.com/photo-1562967916-eb82221dfb92?w=800&auto=format'); background-position: 50% 45%; }
         .pizza-img { background-image: url('https://images.unsplash.com/photo-1513104890138-7c749659a591?w=800&auto=format'); background-position: 50% 50%; }
         .taco-img { background-image: url('https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?w=800&auto=format'); background-position: 50% 50%; }
@@ -371,15 +375,15 @@
 
 <header class="main-header">
     <div class="header-container">
-        <div class="logo-area" onclick="window.location.href='index.html';">
+        <a href="index.html" class="logo-area">
             <i class="fas fa-utensil-spoon logo-icon"></i>
             <span class="logo-text">BIG BACKS</span>
-        </div>
+        </a>
         <div class="nav-links">
-            <span class="nav-item" onclick="window.location.href='home.html';">HOME</span>
-            <span class="nav-item" onclick="window.location.href='rankings.html';">RANKINGS</span>
-            <span class="nav-item" onclick="window.location.href='epicure.html';">EPICURE</span>
-            <span class="nav-item header-cta active" onclick="window.location.href='thefeast.html';">THE FEAST</span>
+            <a href="home.html" class="nav-item">HOME</a>
+            <a href="rankings.html" class="nav-item">RANKINGS</a>
+            <a href="epicure.html" class="nav-item">EPICURE</a>
+            <a href="thefeast.html" class="nav-item header-cta active">THE FEAST</a>
         </div>
     </div>
 </header>
@@ -433,15 +437,15 @@
 
 <script>
     // Feast Database: Daily foods people love with pricing and regional presence
-    // (Removed Loaded Nacho Fries - item id 10)
+    // DIFFERENT IMAGES for Buffalo Wings and Lemon Pepper Wings
     const feastData = [
         { id: 1, name: "Classic Double Cheeseburger", description: "Juicy double patty, melted cheddar, caramelized onions, pickles, and special sauce on a toasted brioche bun.", price: "$8.99", locations: "Nationwide (5,000+ locations)", category: "burger", link: "https://www.whataburger.com/menu", tags: ["All-American", "Lunch Favorite"], imgClass: "burger-img" },
-        { id: 2, name: "Buffalo Wings (12pc)", description: "Crispy chicken wings tossed in signature Buffalo sauce. Served with celery sticks and creamy blue cheese or ranch.", price: "$14.99", locations: "Every state | Wingstop, BWW", category: "wings", link: "https://www.wingstop.com/menu", tags: ["Game Day", "Spicy"], imgClass: "wings-img" },
+        { id: 2, name: "Buffalo Wings (12pc)", description: "Crispy chicken wings tossed in signature Buffalo sauce. Served with celery sticks and creamy blue cheese or ranch.", price: "$14.99", locations: "Every state | Wingstop, BWW", category: "wings", link: "https://www.wingstop.com/menu", tags: ["Game Day", "Spicy"], imgClass: "buffalo-wings-img" },
         { id: 3, name: "Original Chicken Sandwich", description: "Hand-breaded chicken breast, pressure-cooked, served on a buttered bun with pickle chips.", price: "$5.79", locations: "All 50 states | Chick-fil-A", category: "chicken", link: "https://www.chick-fil-a.com/menu", tags: ["Classic", "Drive-Thru"], imgClass: "chicken-img" },
         { id: 4, name: "Pepperoni Stuffed Crust Pizza", description: "Large pizza loaded with pepperoni, mozzarella, and a ring of cheese-stuffed crust.", price: "$16.99", locations: "Nationwide | Pizza Hut, Domino's", category: "pizza", link: "https://www.pizzahut.com/menu", tags: ["Family Size", "Cheesy"], imgClass: "pizza-img" },
         { id: 5, name: "Crunchy Tacos (3-pack)", description: "Crispy corn shells filled with seasoned beef, lettuce, shredded cheese, and signature sauce.", price: "$4.49", locations: "All regions | Taco Bell", category: "tacos", link: "https://www.tacobell.com/food", tags: ["Budget Feast", "Late Night"], imgClass: "taco-img" },
         { id: 6, name: "Loaded Bacon Cheeseburger", description: "Triple stack with crispy bacon, American cheese, lettuce, tomato, and smoky BBQ sauce.", price: "$11.49", locations: "Widely available | Five Guys, Shake Shack", category: "burger", link: "https://www.fiveguys.com/menu", tags: ["Hearty", "Bacon Lover"], imgClass: "burger-img" },
-        { id: 7, name: "Lemon Pepper Wings (Family Pack)", description: "20 wings tossed in lemon pepper seasoning, served with seasoned fries and ranch.", price: "$24.99", locations: "Nationwide | Wingstop, local chains", category: "wings", link: "https://www.wingstop.com/flavors/lemon-pepper", tags: ["Flavor Explosion", "Shareable"], imgClass: "wings-img" },
+        { id: 7, name: "Lemon Pepper Wings (Family Pack)", description: "20 wings tossed in zesty lemon pepper seasoning, served with seasoned fries and ranch. Bright, tangy, and addictive.", price: "$24.99", locations: "Nationwide | Wingstop, local chains", category: "wings", link: "https://www.wingstop.com/flavors/lemon-pepper", tags: ["Flavor Explosion", "Shareable"], imgClass: "lemon-pepper-img" },
         { id: 8, name: "Spicy Chicken Sandwich Combo", description: "Crispy spicy chicken, pickles, mayo on a potato bun + waffle fries & drink.", price: "$8.49", locations: "All 50 states | Popeyes, Chick-fil-A", category: "chicken", link: "https://www.popeyes.com/menu", tags: ["Spicy", "Value Meal"], imgClass: "chicken-img" },
         { id: 9, name: "Supreme Taco Box", description: "12 crunchy tacos with seasoned beef, sour cream, tomatoes, and shredded cheese.", price: "$19.99", locations: "Nationwide | Taco Bell, Del Taco", category: "tacos", link: "https://www.tacobell.com/food", tags: ["Party Pack", "Crowd Pleaser"], imgClass: "taco-img" }
     ];
@@ -553,41 +557,11 @@
         });
     }
     
-    // Navigation handlers for inter-page links
-    function setupNavHandlers() {
-        const homeLink = document.querySelector('.nav-links span:nth-child(1)');
-        const rankingsLink = document.querySelector('.nav-links span:nth-child(2)');
-        const epicureLink = document.querySelector('.nav-links span:nth-child(3)');
-        const logo = document.querySelector('.logo-area');
-        
-        if (homeLink) {
-            homeLink.addEventListener('click', () => {
-                window.location.href = 'home.html';
-            });
-        }
-        if (rankingsLink) {
-            rankingsLink.addEventListener('click', () => {
-                window.location.href = 'rankings.html';
-            });
-        }
-        if (epicureLink) {
-            epicureLink.addEventListener('click', () => {
-                window.location.href = 'epicure.html';
-            });
-        }
-        if (logo) {
-            logo.addEventListener('click', () => {
-                window.location.href = 'index.html';
-            });
-        }
-    }
-    
     // Initialize on load
     document.addEventListener('DOMContentLoaded', () => {
         renderFeastCards('all');
         initFilters();
         initLocationChips();
-        setupNavHandlers();
     });
 </script>
 </body>
