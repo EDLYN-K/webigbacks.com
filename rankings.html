@@ -278,7 +278,7 @@
             color: #A07D55;
         }
 
-        /* Hall of Fame Section */
+        /* Hall of Fame Section - WITH REAL FOOD IMAGES */
         .hall-of-fame {
             background: rgba(245, 240, 232, 0.7);
             border-radius: 36px;
@@ -304,30 +304,53 @@
         .hall-card {
             background: white;
             border-radius: 24px;
-            padding: 1rem;
-            text-align: center;
-            transition: all 0.2s;
+            overflow: hidden;
+            transition: all 0.3s ease;
             border: 1px solid #E9DFD1;
             cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
         }
         .hall-card:hover {
-            transform: translateY(-4px);
+            transform: translateY(-6px);
             border-color: #C7A86B;
-            box-shadow: 0 6px 14px rgba(0,0,0,0.05);
+            box-shadow: 0 12px 20px -10px rgba(80, 60, 35, 0.15);
         }
-        .hall-icon {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
+        .hall-image {
+            height: 160px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        .hall-img-1 { background-image: url('https://images.unsplash.com/photo-1572802419224-296b0aeee0d9?w=600&auto=format'); background-position: 50% 40%; }
+        .hall-img-2 { background-image: url('https://images.unsplash.com/photo-1562967916-eb82221dfb92?w=600&auto=format'); background-position: 50% 45%; }
+        .hall-img-3 { background-image: url('https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?w=600&auto=format'); background-position: 50% 50%; }
+        .hall-img-4 { background-image: url('https://images.unsplash.com/photo-1551782450-17144efb9c50?w=600&auto=format'); background-position: 50% 55%; }
+        .hall-img-5 { background-image: url('https://images.unsplash.com/photo-1550547660-d9450f859349?w=600&auto=format'); background-position: 50% 45%; }
+        .hall-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.5), transparent);
+            padding: 0.8rem 0.8rem 0.4rem;
+            color: #F5EADB;
+            font-size: 0.65rem;
+            font-weight: 500;
+            text-align: right;
+        }
+        .hall-info {
+            padding: 1rem;
+            text-align: center;
         }
         .hall-name {
-            font-weight: 600;
+            font-weight: 700;
             color: #4A3A28;
             font-size: 0.9rem;
+            margin-bottom: 0.2rem;
         }
         .hall-sub {
             font-size: 0.65rem;
             color: #A08258;
-            margin-top: 0.2rem;
         }
 
         /* Footer */
@@ -346,6 +369,7 @@
             .rank-number { font-size: 1.6rem; min-width: 50px; }
             .rank-title { font-size: 1.2rem; }
             .ranking-item { padding: 1rem; }
+            .hall-image { height: 140px; }
         }
     </style>
 </head>
@@ -353,15 +377,15 @@
 
 <header class="main-header">
     <div class="header-container">
-        <div class="logo-area" onclick="window.location.href='#';">
+        <div class="logo-area" onclick="window.location.href='index.html';">
             <i class="fas fa-utensil-spoon logo-icon"></i>
             <span class="logo-text">BIG BACKS</span>
         </div>
         <div class="nav-links">
-            <span class="nav-item" onclick="window.location.href='#';">HOME</span>
-            <span class="nav-item active" onclick="window.location.href='#';">RANKINGS</span>
-            <span class="nav-item" onclick="window.location.href='#';">EPICURE</span>
-            <span class="nav-item header-cta" onclick="window.location.href='#';">THE FEAST</span>
+            <span class="nav-item" onclick="window.location.href='home.html';">HOME</span>
+            <span class="nav-item active" onclick="window.location.href='rankings.html';">RANKINGS</span>
+            <span class="nav-item" onclick="window.location.href='epicure.html';">EPICURE</span>
+            <span class="nav-item header-cta" onclick="window.location.href='thefeast.html';">THE FEAST</span>
         </div>
     </div>
 </header>
@@ -392,13 +416,13 @@
     <!-- Rankings List Container -->
     <div id="rankingsList" class="rankings-list"></div>
 
-    <!-- Hall of Fame Section -->
+    <!-- Hall of Fame Section - WITH REAL FOOD PHOTOGRAPHY -->
     <div class="hall-of-fame">
         <div class="hall-title">
             <i class="fas fa-medal" style="color:#C7A86B;"></i> Hall of Fame — Immortal Bites
         </div>
         <div class="hall-grid" id="hallOfFameGrid">
-            <!-- Populated by JS -->
+            <!-- Populated by JS with real images -->
         </div>
     </div>
 
@@ -424,13 +448,13 @@
         { id: 12, rank: 12, name: "Buffalo Wild Wings", description: "26 signature sauces and dry rubs. Ultimate sports bar wing experience with traditional and boneless options.", score: "8.4 / 10", category: "wings", link: "https://www.buffalowildwings.com/menu", tags: ["Blazin' Challenge", "Tuesday Deal"] }
     ];
 
-    // Hall of Fame data
+    // Hall of Fame data with REAL IMAGE class names and links
     const hallOfFameData = [
-        { name: "Whataburger Patty Melt", icon: "🍔🏆", sub: "Legacy status", link: "https://www.whataburger.com/menu" },
-        { name: "Original Chick-fil-A Sandwich", icon: "🥪✨", sub: "Timeless classic", link: "https://www.chick-fil-a.com/menu" },
-        { name: "Lemon Pepper Wings", icon: "🍗🔥", sub: "Cult following", link: "https://www.wingstop.com/flavors/lemon-pepper" },
-        { name: "Double-Double Animal Style", icon: "🍔🌟", sub: "West coast legend", link: "https://www.in-n-out.com/menu" },
-        { name: "Popeyes Spicy Chicken", icon: "🍔⚡", sub: "Sandwich revolution", link: "https://www.popeyes.com/menu" }
+        { name: "Whataburger Patty Melt", imgClass: "hall-img-1", sub: "Legacy status", link: "https://whataburgermenuus.com/", description: "Iconic Texas patty melt with creamy pepper sauce" },
+        { name: "Original Chick-fil-A Sandwich", imgClass: "hall-img-2", sub: "Timeless classic", link: "https://www.chick-fil-a.com/menu", description: "Hand-breaded chicken perfection" },
+        { name: "Lemon Pepper Wings", imgClass: "hall-img-3", sub: "Cult following", link: "https://www.wingstop.com/flavors/lemon-pepper", description: "Signature tangy wings with seasoned fries" },
+        { name: "ShackBurger", imgClass: "hall-img-4", sub: "Modern classic", link: "https://www.shakeshack.com/menu", description: "Angus beef, ShackSauce, potato bun" },
+        { name: "Popeyes Spicy Chicken", imgClass: "hall-img-5", sub: "Sandwich revolution", link: "https://www.popeyes.com/menu", description: "Buttermilk-battered spicy chicken" }
     ];
 
     // Render rankings with filter
@@ -515,15 +539,19 @@
         }, 2000);
     }
     
-    // Render Hall of Fame
+    // Render Hall of Fame with REAL IMAGES
     function renderHallOfFame() {
         const hallContainer = document.getElementById('hallOfFameGrid');
         if (!hallContainer) return;
         hallContainer.innerHTML = hallOfFameData.map(item => `
             <div class="hall-card" data-link="${item.link}" data-name="${escapeHtml(item.name)}">
-                <div class="hall-icon">${item.icon}</div>
-                <div class="hall-name">${escapeHtml(item.name)}</div>
-                <div class="hall-sub">${escapeHtml(item.sub)}</div>
+                <div class="hall-image ${item.imgClass}">
+                    <div class="hall-overlay">Hall of Fame</div>
+                </div>
+                <div class="hall-info">
+                    <div class="hall-name">${escapeHtml(item.name)}</div>
+                    <div class="hall-sub">${escapeHtml(item.sub)}</div>
+                </div>
             </div>
         `).join('');
         
@@ -555,31 +583,31 @@
         });
     }
     
-    // Navigation handlers (placeholder for full site integration)
+    // Navigation handlers
     function setupNavHandlers() {
         const homeLink = document.querySelector('.nav-links span:nth-child(1)');
         const epicureLink = document.querySelector('.nav-links span:nth-child(3)');
         const feastLink = document.querySelector('.header-cta');
         const logo = document.querySelector('.logo-area');
         
-        if (homeLink) {
-            homeLink.addEventListener('click', () => {
-                showToast("🏠 Welcome to BIG BACKS — explore our definitive rankings!");
+        if (home.html) {
+            home.html.addEventListener('click', () => {
+                window.location.href = 'home.html';
             });
         }
-        if (epicureLink) {
-            epicureLink.addEventListener('click', () => {
-                showToast("✨ Epicurean selections — where fast food meets fine dining.");
+        if (epicure.html) {
+            epicure.html.addEventListener('click', () => {
+                window.location.href = 'epicure.html';
             });
         }
-        if (feastLink) {
-            feastLink.addEventListener('click', () => {
-                showToast("🍔 The Grand Feast — ultimate indulgence awaits.");
+        if (feast.html) {
+            feast.html.addEventListener('click', () => {
+                window.location.href = 'thefeast.html';
             });
         }
         if (logo) {
             logo.addEventListener('click', () => {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+                window.location.href = 'index.html';
             });
         }
     }
