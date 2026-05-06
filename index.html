@@ -77,6 +77,7 @@
             gap: 10px;
             cursor: pointer;
             transition: opacity 0.2s;
+            text-decoration: none;
         }
         .logo-area:hover { opacity: 0.8; }
         .logo-icon {
@@ -107,12 +108,24 @@
             letter-spacing: 0.3px;
             border-bottom: 1px solid transparent;
             padding-bottom: 2px;
+            text-decoration: none;
+            background: none;
+            border: none;
         }
         .nav-item:hover { color: #B28B5E; border-bottom-color: #C5AD8A; }
         .nav-item.active {
             color: #B28B5E;
             border-bottom-color: #C5AD8A;
         }
+        .header-cta {
+            background: #DDCEB4;
+            padding: 0.3rem 1.2rem;
+            border-radius: 30px;
+            color: #2E261E;
+            font-weight: 600;
+            border: none;
+        }
+        .header-cta:hover { background: #CFBA98; color: #1F1A13; border-bottom: none; }
 
         /* Hero Section */
         .hero {
@@ -266,6 +279,8 @@
             color: #5C4A38;
             cursor: pointer;
             transition: 0.2s;
+            text-decoration: none;
+            display: inline-block;
         }
         .quick-btn:hover {
             background: #C7A86B;
@@ -292,16 +307,15 @@
 
 <header class="main-header">
     <div class="header-container">
-        <div class="logo-area" onclick="window.scrollTo({top:0, behavior:'smooth'});">
+        <a href="index.html" class="logo-area" style="text-decoration: none;">
             <i class="fas fa-utensil-spoon logo-icon"></i>
             <span class="logo-text">BIG BACKS</span>
-        </div>
+        </a>
         <div class="nav-links">
-            <span class="nav-item active" onclick="window.scrollTo({top:0, behavior:'smooth'});">DASHBOARD</span>
-            <span class="nav-item" onclick="navigateTo('home')">HOME</span>
-            <span class="nav-item" onclick="navigateTo('rankings')">RANKINGS</span>
-            <span class="nav-item" onclick="navigateTo('epicure')">EPICURE</span>
-            <span class="nav-item" onclick="navigateTo('feast')">THE FEAST</span>
+            <a href="home.html" class="nav-item" id="navHome">HOME</a>
+            <a href="rankings.html" class="nav-item" id="navRankings">RANKINGS</a>
+            <a href="epicure.html" class="nav-item" id="navEpicure">EPICURE</a>
+            <a href="thefeast.html" class="nav-item header-cta" id="navFeast">THE FEAST</a>
         </div>
     </div>
 </header>
@@ -385,12 +399,12 @@
     <!-- Information & Quick Access Section -->
     <div class="info-section">
         <h3><i class="fas fa-compass"></i> Explore All Pages</h3>
-        <p>Click any card above to dive into the full experience. Each page is fully responsive and built with elegance in mind.</p>
+        <p>Click any card above or use the navigation menu to dive into the full experience. Each page is fully responsive and built with elegance in mind.</p>
         <div class="button-group">
-            <button class="quick-btn" onclick="navigateTo('home')"><i class="fas fa-home"></i> Visit Home</button>
-            <button class="quick-btn" onclick="navigateTo('rankings')"><i class="fas fa-trophy"></i> Visit Rankings</button>
-            <button class="quick-btn" onclick="navigateTo('epicure')"><i class="far fa-gem"></i> Visit Epicure</button>
-            <button class="quick-btn" onclick="navigateTo('feast')"><i class="fas fa-utensils"></i> Visit The Feast</button>
+            <a href="home.html" class="quick-btn"><i class="fas fa-home"></i> Visit Home</a>
+            <a href="rankings.html" class="quick-btn"><i class="fas fa-trophy"></i> Visit Rankings</a>
+            <a href="epicure.html" class="quick-btn"><i class="far fa-gem"></i> Visit Epicure</a>
+            <a href="thefeast.html" class="quick-btn"><i class="fas fa-utensils"></i> Visit The Feast</a>
         </div>
     </div>
 
@@ -401,89 +415,138 @@
 </main>
 
 <script>
-    // Navigation helper: redirects to the appropriate HTML file
-    function navigateTo(page) {
-        let url = '';
-        switch(page) {
-            case 'home':
-                url = 'home.html';
-                break;
-            case 'rankings':
-                url = 'rankings.html';
-                break;
-            case 'epicure':
-                url = 'epicure.html';
-                break;
-            case 'feast':
-                url = 'thefeast.html';
-                break;
-            default:
-                url = '#';
-        }
-        if (url && url !== '#') {
-            window.location.href = url;
-        } else {
-            // Fallback toast if files not yet created (development message)
-            showToast(`✨ Navigate to ${page.toUpperCase()} page — ensure ${page}.html exists in the same directory. ✨`);
+    // Highlight active navigation item based on current page
+    function setActiveNavItem() {
+        const currentPath = window.location.pathname;
+        const fileName = currentPath.split('/').pop();
+        
+        // Remove active class from all nav items
+        const navItems = document.querySelectorAll('.nav-item');
+        navItems.forEach(item => item.classList.remove('active'));
+        
+        // Add active class based on current file
+        if (fileName === 'index.html' || fileName === '' || fileName === '/') {
+            // On index page, no nav item gets active (dashboard view)
+            return;
+        } else if (fileName === 'home.html') {
+            const homeNav = document.getElementById('navHome');
+            if (homeNav) homeNav.classList.add('active');
+        } else if (fileName === 'rankings.html') {
+            const rankingsNav = document.getElementById('navRankings');
+            if (rankingsNav) rankingsNav.classList.add('active');
+        } else if (fileName === 'epicure.html') {
+            const epicureNav = document.getElementById('navEpicure');
+            if (epicureNav) epicureNav.classList.add('active');
+        } else if (fileName === 'thefeast.html') {
+            const feastNav = document.getElementById('navFeast');
+            if (feastNav) feastNav.classList.add('active');
         }
     }
-
-    // Elegant toast notification for any missing files or quick info
-    function showToast(message) {
-        let existingToast = document.querySelector('.dashboard-toast');
-        if (existingToast) existingToast.remove();
-        const toast = document.createElement('div');
-        toast.className = 'dashboard-toast';
-        toast.innerText = message;
-        toast.style.cssText = 'position:fixed; bottom:24px; left:50%; transform:translateX(-50%); background:#2C241E; color:#F2E6D8; padding:10px 22px; border-radius:50px; font-size:0.75rem; font-weight:500; z-index:9999; backdrop-filter:blur(8px); border:1px solid #C9AE82;';
-        document.body.appendChild(toast);
-        setTimeout(() => {
-            toast.style.opacity = '0';
-            setTimeout(() => toast.remove(), 300);
-        }, 2200);
+    
+    // Smooth transition toast (optional, for user feedback)
+    function showDepartureToast(pageName) {
+        // Only show if we're not already on that page (simple check)
+        const currentPath = window.location.pathname;
+        const currentFile = currentPath.split('/').pop();
+        let targetFile = '';
+        if (pageName === 'HOME') targetFile = 'home.html';
+        else if (pageName === 'RANKINGS') targetFile = 'rankings.html';
+        else if (pageName === 'EPICURE') targetFile = 'epicure.html';
+        else if (pageName === 'THE FEAST') targetFile = 'thefeast.html';
+        
+        if (currentFile !== targetFile && targetFile) {
+            const toast = document.createElement('div');
+            toast.innerText = `✨ Navigating to ${pageName} — enjoy the experience ✨`;
+            toast.style.cssText = 'position:fixed; bottom:24px; left:50%; transform:translateX(-50%); background:#2C241E; color:#F2E6D8; padding:10px 22px; border-radius:50px; font-size:0.75rem; font-weight:500; z-index:9999; backdrop-filter:blur(8px); border:1px solid #C9AE82;';
+            document.body.appendChild(toast);
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                setTimeout(() => toast.remove(), 300);
+            }, 1200);
+        }
     }
-
-    // Optional: check if files exist (graceful fallback) + add hover effects
-    document.addEventListener('DOMContentLoaded', () => {
-        // For demonstration, we just ensure links work. But we also add a smooth interactive class.
+    
+    // Add click handlers to navigation items for toast feedback (optional, doesn't interfere with href)
+    function addNavigationToasts() {
+        const homeNav = document.getElementById('navHome');
+        const rankingsNav = document.getElementById('navRankings');
+        const epicureNav = document.getElementById('navEpicure');
+        const feastNav = document.getElementById('navFeast');
+        
+        if (homeNav) {
+            homeNav.addEventListener('click', (e) => {
+                showDepartureToast('HOME');
+            });
+        }
+        if (rankingsNav) {
+            rankingsNav.addEventListener('click', (e) => {
+                showDepartureToast('RANKINGS');
+            });
+        }
+        if (epicureNav) {
+            epicureNav.addEventListener('click', (e) => {
+                showDepartureToast('EPICURE');
+            });
+        }
+        if (feastNav) {
+            feastNav.addEventListener('click', (e) => {
+                showDepartureToast('THE FEAST');
+            });
+        }
+        
+        // Also add for cards
         const cards = document.querySelectorAll('.portal-card');
         cards.forEach(card => {
             card.addEventListener('click', (e) => {
-                // just let the default href work; we also show a small loading toast for better UX
                 const href = card.getAttribute('href');
-                if (href && href !== '#') {
-                    showToast(`Loading ${card.querySelector('.card-title')?.innerText || 'page'}...`);
+                if (href && href !== 'index.html') {
+                    let pageName = '';
+                    if (href.includes('home')) pageName = 'HOME';
+                    else if (href.includes('rankings')) pageName = 'RANKINGS';
+                    else if (href.includes('epicure')) pageName = 'EPICURE';
+                    else if (href.includes('thefeast')) pageName = 'THE FEAST';
+                    if (pageName) showDepartureToast(pageName);
                 }
             });
         });
         
-        // Add a subtle animation for active nav
-        const navItems = document.querySelectorAll('.nav-item');
-        navItems.forEach(item => {
-            item.addEventListener('click', function() {
-                navItems.forEach(nav => nav.classList.remove('active'));
-                this.classList.add('active');
+        // Quick buttons
+        const quickBtns = document.querySelectorAll('.quick-btn');
+        quickBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const href = btn.getAttribute('href');
+                if (href) {
+                    let pageName = '';
+                    if (href.includes('home')) pageName = 'HOME';
+                    else if (href.includes('rankings')) pageName = 'RANKINGS';
+                    else if (href.includes('epicure')) pageName = 'EPICURE';
+                    else if (href.includes('thefeast')) pageName = 'THE FEAST';
+                    if (pageName) showDepartureToast(pageName);
+                }
             });
         });
-        
-        // Optional: create missing file placeholder indicator in console (non-intrusive)
-        console.log('%c🍽️ BIG BACKS Dashboard — Click any card to navigate to the respective page. Ensure home.html, rankings.html, epicure.html, thefeast.html exist.', 'color: #C7A86B; font-size: 12px;');
+    }
+    
+    // Initialize on load
+    document.addEventListener('DOMContentLoaded', () => {
+        setActiveNavItem();
+        addNavigationToasts();
     });
 </script>
 
 <!-- 
-    IMPORTANT NOTE FOR USERS:
+    IMPORTANT NOTE:
     This index.html file is designed to work with four separate HTML files in the same directory:
     1. home.html
     2. rankings.html
     3. epicure.html
     4. thefeast.html
     
+    The navigation menu (HOME, RANKINGS, EPICURE, THE FEAST) now uses standard <a> tags with href attributes,
+    ensuring proper page navigation without any "back and forth" issues.
+    
     Place all five files (index.html + the four pages) in the same folder for the navigation to work seamlessly.
     Each page contains its own complete design, content, and functionality.
-    
-    If any file is missing, the link will attempt to open it — you can generate those pages using 
-    the previous code snippets provided for each respective page.
 -->
 </body>
 </html>
